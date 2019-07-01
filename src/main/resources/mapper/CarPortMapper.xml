@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.mapper.CarPortMapper">
+  <resultMap id="BaseResultMap" type="com.community.pojo.CarPort">
+    <id column="port_id" jdbcType="VARCHAR" property="portId" />
+    <result column="owner_Id" jdbcType="INTEGER" property="ownerId" />
+    <result column="port_stat" jdbcType="CHAR" property="portStat" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    port_id, owner_Id, port_stat
+  </sql>
+  <select id="selectByExample" parameterType="com.community.pojo.CarPortExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_port
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from car_port
+    where port_id = #{portId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from car_port
+    where port_id = #{portId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.community.pojo.CarPortExample">
+    delete from car_port
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.community.pojo.CarPort">
+    insert into car_port (port_id, owner_Id, port_stat
+      )
+    values (#{portId,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{portStat,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.community.pojo.CarPort">
+    insert into car_port
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="portId != null">
+        port_id,
+      </if>
+      <if test="ownerId != null">
+        owner_Id,
+      </if>
+      <if test="portStat != null">
+        port_stat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="portId != null">
+        #{portId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="portStat != null">
+        #{portStat,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.community.pojo.CarPortExample" resultType="java.lang.Long">
+    select count(*) from car_port
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update car_port
+    <set>
+      <if test="record.portId != null">
+        port_id = #{record.portId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerId != null">
+        owner_Id = #{record.ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.portStat != null">
+        port_stat = #{record.portStat,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update car_port
+    set port_id = #{record.portId,jdbcType=VARCHAR},
+      owner_Id = #{record.ownerId,jdbcType=INTEGER},
+      port_stat = #{record.portStat,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.community.pojo.CarPort">
+    update car_port
+    <set>
+      <if test="ownerId != null">
+        owner_Id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="portStat != null">
+        port_stat = #{portStat,jdbcType=CHAR},
+      </if>
+    </set>
+    where port_id = #{portId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.community.pojo.CarPort">
+    update car_port
+    set owner_Id = #{ownerId,jdbcType=INTEGER},
+      port_stat = #{portStat,jdbcType=CHAR}
+    where port_id = #{portId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.mapper.HOwnerMapper">
+  <resultMap id="BaseResultMap" type="com.community.pojo.HOwner">
+    <id column="owner_Id" jdbcType="INTEGER" property="ownerId" />
+    <result column="owner_Name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="owner_Password" jdbcType="VARCHAR" property="ownerPassword" />
+    <result column="iphone" jdbcType="CHAR" property="iphone" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="car_id" jdbcType="VARCHAR" property="carId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    owner_Id, owner_Name, owner_Password, iphone, sex, age, car_id
+  </sql>
+  <select id="selectByExample" parameterType="com.community.pojo.HOwnerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from h_owner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from h_owner
+    where owner_Id = #{ownerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_owner
+    where owner_Id = #{ownerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.community.pojo.HOwnerExample">
+    delete from h_owner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.community.pojo.HOwner">
+    insert into h_owner (owner_Id, owner_Name, owner_Password, 
+      iphone, sex, age, car_id
+      )
+    values (#{ownerId,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{ownerPassword,jdbcType=VARCHAR}, 
+      #{iphone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{carId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.community.pojo.HOwner">
+    insert into h_owner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        owner_Id,
+      </if>
+      <if test="ownerName != null">
+        owner_Name,
+      </if>
+      <if test="ownerPassword != null">
+        owner_Password,
+      </if>
+      <if test="iphone != null">
+        iphone,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="ownerName != null">
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPassword != null">
+        #{ownerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="iphone != null">
+        #{iphone,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.community.pojo.HOwnerExample" resultType="java.lang.Long">
+    select count(*) from h_owner
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update h_owner
+    <set>
+      <if test="record.ownerId != null">
+        owner_Id = #{record.ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownerName != null">
+        owner_Name = #{record.ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerPassword != null">
+        owner_Password = #{record.ownerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iphone != null">
+        iphone = #{record.iphone,jdbcType=CHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update h_owner
+    set owner_Id = #{record.ownerId,jdbcType=INTEGER},
+      owner_Name = #{record.ownerName,jdbcType=VARCHAR},
+      owner_Password = #{record.ownerPassword,jdbcType=VARCHAR},
+      iphone = #{record.iphone,jdbcType=CHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      car_id = #{record.carId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.community.pojo.HOwner">
+    update h_owner
+    <set>
+      <if test="ownerName != null">
+        owner_Name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerPassword != null">
+        owner_Password = #{ownerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="iphone != null">
+        iphone = #{iphone,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where owner_Id = #{ownerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.community.pojo.HOwner">
+    update h_owner
+    set owner_Name = #{ownerName,jdbcType=VARCHAR},
+      owner_Password = #{ownerPassword,jdbcType=VARCHAR},
+      iphone = #{iphone,jdbcType=CHAR},
+      sex = #{sex,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      car_id = #{carId,jdbcType=VARCHAR}
+    where owner_Id = #{ownerId,jdbcType=INTEGER}
+  </update>
+</mapper>
