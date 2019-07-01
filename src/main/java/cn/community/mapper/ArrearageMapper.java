@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.Arrearage;
-import com.community.pojo.ArrearageExample;
+import cn.community.pojo.Arrearage;
+import cn.community.pojo.ArrearageExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
