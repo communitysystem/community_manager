@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.Staff;
-import com.community.pojo.StaffExample;
+import cn.community.pojo.Staff;
+import cn.community.pojo.StaffExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

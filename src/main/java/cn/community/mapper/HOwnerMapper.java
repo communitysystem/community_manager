@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.HOwner;
-import com.community.pojo.HOwnerExample;
+import cn.community.pojo.HOwner;
+import cn.community.pojo.HOwnerExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

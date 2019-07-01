@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.Complaint;
-import com.community.pojo.ComplaintExample;
+import cn.community.pojo.Complaint;
+import cn.community.pojo.ComplaintExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

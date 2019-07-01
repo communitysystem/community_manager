@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.House;
-import com.community.pojo.HouseExample;
+import cn.community.pojo.House;
+import cn.community.pojo.HouseExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.News;
-import com.community.pojo.NewsExample;
+import cn.community.pojo.News;
+import cn.community.pojo.NewsExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package cn.community.mapper;
 
-import com.community.pojo.CarPort;
-import com.community.pojo.CarPortExample;
+import cn.community.pojo.CarPort;
+import cn.community.pojo.CarPortExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
