@@ -1,4 +1,4 @@
-package cn.idhclub.contronller;
+package cn.community.contronller;
 
 import org.springframework.stereotype.Controller;
 

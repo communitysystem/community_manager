@@ -1,4 +1,4 @@
-package cn.idhclub;
+package cn.community;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
