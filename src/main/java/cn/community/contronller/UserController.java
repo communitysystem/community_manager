@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -20,7 +20,7 @@ public class UserController {
     @RequestMapping("/login")
     public String login(User user, Map<String, Object> map){
         String loginMsg = userService.login(user);
-        if(loginMsg.equals("账号错误") || loginMsg.equals("密码错误")){
+        if(loginMsg.equals("账号错误") || loginMsg.equals("密码错误") || loginMsg.equals("账号为数字")){
             map.put("msg",loginMsg);
             return "login";
         }

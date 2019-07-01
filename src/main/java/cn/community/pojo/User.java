@@ -1,15 +1,15 @@
 package cn.community.pojo;
 
 public class User {
-    private int userName;
+    private String userName;
     private String password;
-    private int role;
+    private int role ;
 
-    public int getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUserName(int userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 

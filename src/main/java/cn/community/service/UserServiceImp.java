@@ -22,9 +22,17 @@ public class UserServiceImp implements UserService {
     @Override
     public String login(User user) {
         int role = user.getRole();
+        Integer name;
+        try {
+            name = Integer.valueOf(user.getUserName());
+
+        }catch (Exception e){
+            return "账号为数字";
+        }
+
         switch (role){
             case 1:{
-                Manager manager = managerMapper.selectByPrimaryKey(user.getUserName());
+                Manager manager = managerMapper.selectByPrimaryKey(name);
                 if(manager == null){
                     return "账号错误";
                 }else if(!manager.getManagerPassword().equals(user.getPassword())){
@@ -35,7 +43,7 @@ public class UserServiceImp implements UserService {
             }
 
             case 2:{
-                HOwner hOwner = hOwnerMapper.selectByPrimaryKey(user.getUserName());
+                HOwner hOwner = hOwnerMapper.selectByPrimaryKey(name);
                 if(hOwner == null){
                     return "账号错误";
                 }else if(!hOwner.getOwnerPassword().equals(user.getPassword())){
@@ -45,7 +53,7 @@ public class UserServiceImp implements UserService {
                 }
             }
             case 3:{
-                Staff staff = staffMapper.selectByPrimaryKey(user.getUserName());
+                Staff staff = staffMapper.selectByPrimaryKey(name);
                 if(staff == null){
                     return "账号错误";
                 }else if(!staff.getStaffName().equals(user.getPassword())){

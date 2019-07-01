@@ -42,8 +42,10 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">登录系统</p>
-
+            <p style="color: red" th:text="${msg}" th:if="${not
+     #strings.isEmpty(msg)}"></p>
             <form action="/user/login" method="post">
+
                 <div class="form-group has-feedback">
                     <input name="userName" type="text" class="form-control" placeholder="用户名">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -56,7 +58,7 @@
                     <div class="col-xs-8">
                         <div class="form-group form-inline">
                             <div class="radio"><label><input type="radio" name="role" value="1"> 管理员</label></div>
-                            <div class="radio"><label><input type="radio" name="role" value="2"> 业主</label></div>
+                            <div class="radio"><label><input type="radio" name="role" value="2" checked="true"> 业主</label></div>
                         </div>
 
                     </div>

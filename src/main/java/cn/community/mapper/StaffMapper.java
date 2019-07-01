@@ -3,10 +3,13 @@ package cn.community.mapper;
 import cn.community.pojo.Staff;
 import cn.community.pojo.StaffExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface StaffMapper {
+
     long countByExample(StaffExample example);
 
     int deleteByExample(StaffExample example);
