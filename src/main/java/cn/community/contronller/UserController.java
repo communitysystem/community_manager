@@ -26,4 +26,18 @@ public class UserController {
         }
         return loginMsg;
     }
+
+    @RequestMapping("/signIn")
+    public String signIn(HOwner hOwner,Map<String,Object> map){
+        String msg =  userService.signIn(hOwner);
+        if("login".equals(msg)){
+            return "login";
+        }else {
+            map.put("msg",msg);
+            return "hower_register";
+
+        }
+
+
+    }
 }

@@ -19,6 +19,12 @@ public class UserServiceImp implements UserService {
     StaffMapper staffMapper;
     @Autowired
     HOwnerMapper hOwnerMapper;
+
+    /**
+     * 用户登录
+     * @param user
+     * @return
+     */
     @Override
     public String login(User user) {
         int role = user.getRole();
@@ -65,5 +71,19 @@ public class UserServiceImp implements UserService {
         }
 
         return null;
+    }
+
+    /**
+     * 业主注册
+     * @param hOwner
+     * @return
+     */
+    @Override
+    public String signIn(HOwner hOwner) {
+        int insertResult = hOwnerMapper.insert(hOwner);
+        if(insertResult <= 0){
+            return "注册失败";
+        }
+        return "login";
     }
 }

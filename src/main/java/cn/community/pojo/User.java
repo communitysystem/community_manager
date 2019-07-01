@@ -1,7 +1,7 @@
 package cn.community.pojo;
 
 public class User {
-    private String userName;
+    private String userName = null;
     private String password;
     private int role ;
 
