@@ -10,6 +10,10 @@ public class News implements Serializable {
 
     private Integer managerId;
 
+    private String title;
+
+    private String picture;
+
     private String newCommnet;
 
     private static final long serialVersionUID = 1L;
@@ -36,6 +40,22 @@ public class News implements Serializable {
 
     public void setManagerId(Integer managerId) {
         this.managerId = managerId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 
     public String getNewCommnet() {

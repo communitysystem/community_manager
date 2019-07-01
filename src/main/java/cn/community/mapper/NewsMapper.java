@@ -3,11 +3,9 @@ package cn.community.mapper;
 import cn.community.pojo.News;
 import cn.community.pojo.NewsExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface NewsMapper {
     long countByExample(NewsExample example);
 
