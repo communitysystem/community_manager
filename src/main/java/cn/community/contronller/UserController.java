@@ -1,19 +1,29 @@
 package cn.community.contronller;
 
+import cn.community.c_interface.UserService;
 import cn.community.mapper.HOwnerMapper;
 import cn.community.pojo.HOwner;
+import cn.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
-    HOwnerMapper owner;
+    UserService userService;
 
-    @RequestMapping("/a")
-    public HOwner getById(Integer id) {
-        return owner.selectByPrimaryKey(id);
+    @RequestMapping("/login")
+    public String login(User user, Map<String, Object> map){
+        String loginMsg = userService.login(user);
+        if(loginMsg.equals("账号错误") || loginMsg.equals("密码错误")){
+            map.put("msg",loginMsg);
+            return "login";
+        }
+        return loginMsg;
     }
 }
