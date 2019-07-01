@@ -2,10 +2,14 @@ package cn.community.mapper;
 
 import cn.community.pojo.HOwner;
 import cn.community.pojo.HOwnerExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Mapper
 public interface HOwnerMapper {
     long countByExample(HOwnerExample example);
 

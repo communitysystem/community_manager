@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.community.mapper.NewsMapper">
-  <resultMap id="BaseResultMap" type="com.community.pojo.News">
+<mapper namespace="cn.community.mapper.NewsMapper">
+  <resultMap id="BaseResultMap" type="cn.community.pojo.News">
     <id column="news_id" jdbcType="VARCHAR" property="newsId" />
     <result column="news_date" jdbcType="DATE" property="newsDate" />
     <result column="manager_id" jdbcType="INTEGER" property="managerId" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.community.pojo.News">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.community.pojo.News">
     <result column="new_commnet" jdbcType="LONGVARCHAR" property="newCommnet" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,7 +73,7 @@
   <sql id="Blob_Column_List">
     new_commnet
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.community.pojo.NewsExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="cn.community.pojo.NewsExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -89,7 +89,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.community.pojo.NewsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.community.pojo.NewsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -115,19 +115,19 @@
     delete from news
     where news_id = #{newsId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.community.pojo.NewsExample">
+  <delete id="deleteByExample" parameterType="cn.community.pojo.NewsExample">
     delete from news
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.community.pojo.News">
+  <insert id="insert" parameterType="cn.community.pojo.News">
     insert into news (news_id, news_date, manager_id, 
       new_commnet)
     values (#{newsId,jdbcType=VARCHAR}, #{newsDate,jdbcType=DATE}, #{managerId,jdbcType=INTEGER}, 
       #{newCommnet,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.community.pojo.News">
+  <insert id="insertSelective" parameterType="cn.community.pojo.News">
     insert into news
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="newsId != null">
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.community.pojo.NewsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.community.pojo.NewsExample" resultType="java.lang.Long">
     select count(*) from news
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -203,7 +203,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.community.pojo.News">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.community.pojo.News">
     update news
     <set>
       <if test="newsDate != null">
@@ -218,14 +218,14 @@
     </set>
     where news_id = #{newsId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.community.pojo.News">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.community.pojo.News">
     update news
     set news_date = #{newsDate,jdbcType=DATE},
       manager_id = #{managerId,jdbcType=INTEGER},
       new_commnet = #{newCommnet,jdbcType=LONGVARCHAR}
     where news_id = #{newsId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.community.pojo.News">
+  <update id="updateByPrimaryKey" parameterType="cn.community.pojo.News">
     update news
     set news_date = #{newsDate,jdbcType=DATE},
       manager_id = #{managerId,jdbcType=INTEGER}

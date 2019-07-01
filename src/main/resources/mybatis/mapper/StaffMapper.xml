@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.community.mapper.StaffMapper">
-  <resultMap id="BaseResultMap" type="com.community.pojo.Staff">
+<mapper namespace="cn.community.mapper.StaffMapper">
+  <resultMap id="BaseResultMap" type="cn.community.pojo.Staff">
     <id column="staff_id" jdbcType="INTEGER" property="staffId" />
     <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
     <result column="staff_password" jdbcType="VARCHAR" property="staffPassword" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     staff_id, staff_name, staff_password, sex, iphone
   </sql>
-  <select id="selectByExample" parameterType="com.community.pojo.StaffExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.community.pojo.StaffExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from staff
     where staff_id = #{staffId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.community.pojo.StaffExample">
+  <delete id="deleteByExample" parameterType="cn.community.pojo.StaffExample">
     delete from staff
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.community.pojo.Staff">
+  <insert id="insert" parameterType="cn.community.pojo.Staff">
     insert into staff (staff_id, staff_name, staff_password, 
       sex, iphone)
     values (#{staffId,jdbcType=INTEGER}, #{staffName,jdbcType=VARCHAR}, #{staffPassword,jdbcType=VARCHAR}, 
       #{sex,jdbcType=CHAR}, #{iphone,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.community.pojo.Staff">
+  <insert id="insertSelective" parameterType="cn.community.pojo.Staff">
     insert into staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="staffId != null">
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.community.pojo.StaffExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.community.pojo.StaffExample" resultType="java.lang.Long">
     select count(*) from staff
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.community.pojo.Staff">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.community.pojo.Staff">
     update staff
     <set>
       <if test="staffName != null">
@@ -200,7 +200,7 @@
     </set>
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.community.pojo.Staff">
+  <update id="updateByPrimaryKey" parameterType="cn.community.pojo.Staff">
     update staff
     set staff_name = #{staffName,jdbcType=VARCHAR},
       staff_password = #{staffPassword,jdbcType=VARCHAR},

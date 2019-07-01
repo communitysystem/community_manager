@@ -5,7 +5,6 @@ import cn.community.pojo.CarPortExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
 public interface CarPortMapper {
     long countByExample(CarPortExample example);
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.community.mapper.MaintainMapper">
-  <resultMap id="BaseResultMap" type="com.community.pojo.Maintain">
+<mapper namespace="cn.community.mapper.MaintainMapper">
+  <resultMap id="BaseResultMap" type="cn.community.pojo.Maintain">
     <id column="maintain_id" jdbcType="VARCHAR" property="maintainId" />
     <result column="owner_Id" jdbcType="INTEGER" property="ownerId" />
     <result column="staff_id" jdbcType="INTEGER" property="staffId" />
     <result column="maintain_charge" jdbcType="DOUBLE" property="maintainCharge" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.community.pojo.Maintain">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.community.pojo.Maintain">
     <result column="maintain_info" jdbcType="LONGVARCHAR" property="maintainInfo" />
     <result column="feedback" jdbcType="LONGVARCHAR" property="feedback" />
   </resultMap>
@@ -76,7 +76,7 @@
   <sql id="Blob_Column_List">
     maintain_info, feedback
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.community.pojo.MaintainExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="cn.community.pojo.MaintainExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -92,7 +92,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.community.pojo.MaintainExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.community.pojo.MaintainExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -118,13 +118,13 @@
     delete from maintain
     where maintain_id = #{maintainId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.community.pojo.MaintainExample">
+  <delete id="deleteByExample" parameterType="cn.community.pojo.MaintainExample">
     delete from maintain
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.community.pojo.Maintain">
+  <insert id="insert" parameterType="cn.community.pojo.Maintain">
     insert into maintain (maintain_id, owner_Id, staff_id, 
       maintain_charge, picture, maintain_info, 
       feedback)
@@ -132,7 +132,7 @@
       #{maintainCharge,jdbcType=DOUBLE}, #{picture,jdbcType=VARCHAR}, #{maintainInfo,jdbcType=LONGVARCHAR}, 
       #{feedback,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.community.pojo.Maintain">
+  <insert id="insertSelective" parameterType="cn.community.pojo.Maintain">
     insert into maintain
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="maintainId != null">
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.community.pojo.MaintainExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.community.pojo.MaintainExample" resultType="java.lang.Long">
     select count(*) from maintain
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -240,7 +240,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.community.pojo.Maintain">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.community.pojo.Maintain">
     update maintain
     <set>
       <if test="ownerId != null">
@@ -264,7 +264,7 @@
     </set>
     where maintain_id = #{maintainId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.community.pojo.Maintain">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.community.pojo.Maintain">
     update maintain
     set owner_Id = #{ownerId,jdbcType=INTEGER},
       staff_id = #{staffId,jdbcType=INTEGER},
@@ -274,7 +274,7 @@
       feedback = #{feedback,jdbcType=LONGVARCHAR}
     where maintain_id = #{maintainId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.community.pojo.Maintain">
+  <update id="updateByPrimaryKey" parameterType="cn.community.pojo.Maintain">
     update maintain
     set owner_Id = #{ownerId,jdbcType=INTEGER},
       staff_id = #{staffId,jdbcType=INTEGER},
