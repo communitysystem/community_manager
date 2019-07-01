@@ -42,7 +42,7 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">登录系统</p>
-            <p style="color: red" th:text="${msg}" th:if="${not
+            <p class="login-box-msg" style="color: red" th:text="${msg}" th:if="${not
      #strings.isEmpty(msg)}"></p>
             <form action="/user/login" method="post">
 
