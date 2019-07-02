@@ -26,4 +26,17 @@ public class ComplaintServiceImpl implements ComplaintService {
         }
 
     }
+
+    @Override
+    public List<Complaint> getAllComplaint(Integer ownerId) {
+        ComplaintExample complaintExample = new ComplaintExample();
+        complaintExample.createCriteria().andOwnerIdEqualTo(ownerId);
+        List<Complaint> complaints = complaintMapper.selectByExampleWithBLOBs(complaintExample);
+        return complaints;
+    }
+
+    @Override
+    public void delComplantById(String id) {
+        complaintMapper.deleteByPrimaryKey(id);
+    }
 }
