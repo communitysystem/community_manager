@@ -46,7 +46,7 @@ public class IndexController {
         map.put("complaint", complaintByOwnId);
         map.put("maintain", maintainByownId);
 
-        System.out.println("map = " + map);
+//        System.out.println("map = " + map);
         return "index";
     }
 }
