@@ -22,6 +22,7 @@ public class UserServiceImp implements UserService {
 
     /**
      * 用户登录
+     *
      * @param user
      * @return
      */
@@ -32,40 +33,41 @@ public class UserServiceImp implements UserService {
         try {
             name = Integer.valueOf(user.getUserName());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return "账号为数字";
         }
 
-        switch (role){
-            case 1:{
+        switch (role) {
+            case 1: {
                 Manager manager = managerMapper.selectByPrimaryKey(name);
-                if(manager == null){
+                if (manager == null) {
                     return "账号错误";
-                }else if(!manager.getManagerPassword().equals(user.getPassword())){
+                } else if (!manager.getManagerPassword().equals(user.getPassword())) {
                     return "密码错误";
-                }else {
-                    return "index";
+                } else {
+//                    int ownerId = user.getUserName();
+                    return "redirect:/index";
                 }
             }
-
-            case 2:{
+//是业主
+            case 2: {
                 HOwner hOwner = hOwnerMapper.selectByPrimaryKey(name);
-                if(hOwner == null){
+                if (hOwner == null) {
                     return "账号错误";
-                }else if(!hOwner.getOwnerPassword().equals(user.getPassword())){
+                } else if (!hOwner.getOwnerPassword().equals(user.getPassword())) {
                     return "密码错误";
-                }else {
-                    return "index";
+                } else {
+                    return "redirect:/index/"+hOwner.getOwnerId();
                 }
             }
-            case 3:{
+            case 3: {
                 Staff staff = staffMapper.selectByPrimaryKey(name);
-                if(staff == null){
+                if (staff == null) {
                     return "账号错误";
-                }else if(!staff.getStaffName().equals(user.getPassword())){
+                } else if (!staff.getStaffName().equals(user.getPassword())) {
                     return "密码错误";
-                }else {
-                    return "index";
+                } else {
+                    return "redirect:/index";
                 }
             }
         }
@@ -75,13 +77,14 @@ public class UserServiceImp implements UserService {
 
     /**
      * 业主注册
+     *
      * @param hOwner
      * @return
      */
     @Override
     public String signIn(HOwner hOwner) {
         int insertResult = hOwnerMapper.insert(hOwner);
-        if(insertResult <= 0){
+        if (insertResult <= 0) {
             return "注册失败";
         }
         return "login";

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Complaint implements Serializable {
-    private String complaintId;
+    private String complaintId = "无投诉信息";
 
     private Integer ownerId;
 
     private Date complaintDate;
 
-    private String complaintComment;
+    private String complaintComment = "无";
 
     private static final long serialVersionUID = 1L;
 

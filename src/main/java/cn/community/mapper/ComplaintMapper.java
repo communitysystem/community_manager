@@ -3,9 +3,11 @@ package cn.community.mapper;
 import cn.community.pojo.Complaint;
 import cn.community.pojo.ComplaintExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ComplaintMapper {
     long countByExample(ComplaintExample example);
 

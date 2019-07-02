@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Arrearage implements Serializable {
-    private String arrearageId;
+    private String arrearageId = "无欠费信息";
 
     private Integer ownerId;
 
-    private Double arrearageSum;
+    private Double arrearageSum = 0.0;
 
     private Date arrearageDate;
 
