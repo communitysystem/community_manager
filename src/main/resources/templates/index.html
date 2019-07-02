@@ -725,7 +725,7 @@
                 <!-- 菜单 /-->
 
                 <li id="admin-documentation"><a href="documentation.html" target="_blank"><i class="fa fa-book"></i>
-                    <span>AdminLTE汉化文档</span></a></li>
+                    <span></span></a></li>
 
             </ul>
         </section>
@@ -774,9 +774,9 @@
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3 th:inline="text">欠费数：[[${arrearage.getArrearageSum()}]]</h3>
+                            <h4 th:inline="text" style="font-weight: bold">欠费：[[${arrearage.getArrearageSum()}]]</h4>
 
-                            <p th:inline="text">欠费日期：[[${arrearage.getArrearageDate()}]]</p>
+                            <p th:inline="text">欠费日期：[[${#dates.format(arrearage.getArrearageDate(), 'yyyy-MM-dd')}]]</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-fw fa-credit-card"></i>
@@ -790,9 +790,9 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>投诉反馈</h3>
-
-                            <p > 投诉信息：[[${complaint.getComplaintComment()}]]</p>
+                            <h3 >投诉反馈:</h3>
+                            <p th:inline="text" style="color: red">[[${complaint.getFeedback()}]]</p>
+                            <p> 投诉信息：[[${complaint.getComplaintComment()}]]</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-fw fa-file-text"></i>

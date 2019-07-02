@@ -12,6 +12,16 @@ public class Complaint implements Serializable {
 
     private String complaintComment = "无";
 
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    private String feedback = "暂未回复";
+
     private static final long serialVersionUID = 1L;
 
     public String getComplaintId() {
