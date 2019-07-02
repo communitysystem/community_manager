@@ -52,7 +52,7 @@ public class UserServiceImp implements UserService {
                 }else if(!hOwner.getOwnerPassword().equals(user.getPassword())){
                     return "密码错误";
                 }else {
-                    return "/index";
+                    return "redirect:/index";
                 }
             }
             case 3:{
