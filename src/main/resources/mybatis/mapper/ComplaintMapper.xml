@@ -8,6 +8,7 @@
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.community.pojo.Complaint">
     <result column="complaint_comment" jdbcType="LONGVARCHAR" property="complaintComment" />
+    <result column="feedback" jdbcType="LONGVARCHAR" property="feedback" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     complaint_id, owner_id, complaint_date
   </sql>
   <sql id="Blob_Column_List">
-    complaint_comment
+    complaint_comment, feedback
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="cn.community.pojo.ComplaintExample" resultMap="ResultMapWithBLOBs">
     select
@@ -123,9 +124,9 @@
   </delete>
   <insert id="insert" parameterType="cn.community.pojo.Complaint">
     insert into complaint (complaint_id, owner_id, complaint_date, 
-      complaint_comment)
+      complaint_comment, feedback)
     values (#{complaintId,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{complaintDate,jdbcType=DATE}, 
-      #{complaintComment,jdbcType=LONGVARCHAR})
+      #{complaintComment,jdbcType=LONGVARCHAR}, #{feedback,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.community.pojo.Complaint">
     insert into complaint
@@ -142,6 +143,9 @@
       <if test="complaintComment != null">
         complaint_comment,
       </if>
+      <if test="feedback != null">
+        feedback,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="complaintId != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="complaintComment != null">
         #{complaintComment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="feedback != null">
+        #{feedback,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,6 +186,9 @@
       <if test="record.complaintComment != null">
         complaint_comment = #{record.complaintComment,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.feedback != null">
+        feedback = #{record.feedback,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -189,7 +199,8 @@
     set complaint_id = #{record.complaintId,jdbcType=VARCHAR},
       owner_id = #{record.ownerId,jdbcType=INTEGER},
       complaint_date = #{record.complaintDate,jdbcType=DATE},
-      complaint_comment = #{record.complaintComment,jdbcType=LONGVARCHAR}
+      complaint_comment = #{record.complaintComment,jdbcType=LONGVARCHAR},
+      feedback = #{record.feedback,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,6 +226,9 @@
       <if test="complaintComment != null">
         complaint_comment = #{complaintComment,jdbcType=LONGVARCHAR},
       </if>
+      <if test="feedback != null">
+        feedback = #{feedback,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where complaint_id = #{complaintId,jdbcType=VARCHAR}
   </update>
@@ -222,7 +236,8 @@
     update complaint
     set owner_id = #{ownerId,jdbcType=INTEGER},
       complaint_date = #{complaintDate,jdbcType=DATE},
-      complaint_comment = #{complaintComment,jdbcType=LONGVARCHAR}
+      complaint_comment = #{complaintComment,jdbcType=LONGVARCHAR},
+      feedback = #{feedback,jdbcType=LONGVARCHAR}
     where complaint_id = #{complaintId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.community.pojo.Complaint">
