@@ -28,7 +28,7 @@ public class UserController {
         session.setAttribute("userId",Integer.valueOf(user.getUserName()));     //将用户的账号存到session中
         //查询出用户的信息
         HOwner hOwner = userService.searchById(Integer.valueOf(user.getUserName()));  //查询用户的信息
-        map.put("userName",hOwner.getOwnerName());
+        session.setAttribute("user",hOwner);
         return loginMsg;
     }
 
@@ -37,7 +37,7 @@ public class UserController {
         RegisterResult registerResult =  userService.signIn(hOwner);
         String msg = registerResult.getMsg();
         if("login".equals(msg)){
-            map.put("userName",registerResult.getUserName());
+            map.put("userId",registerResult.getUserName());
             map.put("warningInfo","这是您的账号，请牢记！");
             return "login";
         }else {
