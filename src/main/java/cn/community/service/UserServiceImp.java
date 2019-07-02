@@ -62,7 +62,7 @@ public class UserServiceImp implements UserService {
                 }else if(!staff.getStaffName().equals(user.getPassword())){
                     return "密码错误";
                 }else {
-                    return "index";
+                    return "/index";
                 }
             }
         }

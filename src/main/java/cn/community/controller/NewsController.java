@@ -1,4 +1,4 @@
-package cn.community.contronller;
+package cn.community.controller;
 
 import cn.community.c_interface.NewsService;
 import cn.community.pojo.News;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/news")
-public class NewsContronller {
+public class NewsController {
     @Autowired
     NewsService newsService;
 

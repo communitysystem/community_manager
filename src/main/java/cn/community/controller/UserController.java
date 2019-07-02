@@ -1,14 +1,12 @@
-package cn.community.contronller;
+package cn.community.controller;
 
 import cn.community.c_interface.UserService;
-import cn.community.mapper.HOwnerMapper;
 import cn.community.pojo.HOwner;
 import cn.community.pojo.RegisterResult;
 import cn.community.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -26,6 +24,7 @@ public class UserController {
             map.put("msg",loginMsg);
             return "login";
         }
+
         session.setAttribute("userId",Integer.valueOf(user.getUserName()));     //将用户的账号存到session中
         //查询出用户的信息
         HOwner hOwner = userService.searchById(Integer.valueOf(user.getUserName()));  //查询用户的信息
