@@ -1,4 +1,4 @@
-package cn.community.contronller;
+package cn.community.controller;
 
 import cn.community.c_interface.*;
 import cn.community.pojo.*;
