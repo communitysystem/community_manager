@@ -3,19 +3,19 @@ package cn.community.pojo;
 import java.io.Serializable;
 
 public class Maintain implements Serializable {
-    private String maintainId;
+    private String maintainId = "无保修";
 
     private Integer ownerId;
 
     private Integer staffId;
 
-    private Double maintainCharge;
+    private Double maintainCharge = 0.0;
 
     private String picture;
 
-    private String maintainInfo;
+    private String maintainInfo = "无";
 
-    private String feedback;
+    private String feedback = "无";
 
     private static final long serialVersionUID = 1L;
 

@@ -3,8 +3,10 @@ package cn.community.mapper;
 import cn.community.pojo.CarPort;
 import cn.community.pojo.CarPortExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@Repository
 public interface CarPortMapper {
     long countByExample(CarPortExample example);
 

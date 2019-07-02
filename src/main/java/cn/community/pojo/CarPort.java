@@ -3,11 +3,11 @@ package cn.community.pojo;
 import java.io.Serializable;
 
 public class CarPort implements Serializable {
-    private String portId;
+    private String portId = "暂无车位";
 
     private Integer ownerId;
 
-    private String portStat;
+    private String portStat = "无";
 
     private static final long serialVersionUID = 1L;
 

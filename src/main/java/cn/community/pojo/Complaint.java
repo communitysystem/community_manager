@@ -4,13 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Complaint implements Serializable {
-    private String complaintId;
+    private String complaintId = "无投诉信息";
 
     private Integer ownerId;
 
     private Date complaintDate;
 
-    private String complaintComment;
+    private String complaintComment = "无";
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    }
+
+    private String feedback = "暂未回复";
 
     private static final long serialVersionUID = 1L;
 

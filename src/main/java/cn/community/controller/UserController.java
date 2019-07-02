@@ -44,7 +44,6 @@ public class UserController {
             map.put("msg",msg);
 
             return "hower_register";
-
         }
 
 

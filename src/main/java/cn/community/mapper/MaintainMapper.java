@@ -3,9 +3,10 @@ package cn.community.mapper;
 import cn.community.pojo.Maintain;
 import cn.community.pojo.MaintainExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface MaintainMapper {
     long countByExample(MaintainExample example);
 
