@@ -1,8 +1,11 @@
 package cn.community.c_interface;
 
 import cn.community.pojo.HOwner;
+import cn.community.pojo.RegisterResult;
 import cn.community.pojo.User;
 import org.apache.logging.log4j.message.Message;
+
+import java.util.Map;
 
 public interface UserService {
     /**
@@ -17,5 +20,9 @@ public interface UserService {
      * @param hOwner
      * @return
      */
-    public String signIn(HOwner hOwner);
+    public RegisterResult signIn(HOwner hOwner);
+    /**
+     * 根据用户id查询所有的用户信息
+     */
+    public HOwner searchById(int ownerId);
 }

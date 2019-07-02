@@ -101,13 +101,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.community.pojo.HOwner">
+  <insert id="insert" parameterType="cn.community.pojo.HOwner"  >
+    <selectKey  keyProperty="ownerId" keyColumn="owner_id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into h_owner (owner_Id, owner_Name, owner_Password, 
       iphone, sex, age, car_id
       )
     values (#{ownerId,jdbcType=INTEGER}, #{ownerName,jdbcType=VARCHAR}, #{ownerPassword,jdbcType=VARCHAR}, 
       #{iphone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{carId,jdbcType=VARCHAR}
       )
+
   </insert>
   <insert id="insertSelective" parameterType="cn.community.pojo.HOwner">
     insert into h_owner

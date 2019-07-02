@@ -4,10 +4,7 @@ import cn.community.c_interface.UserService;
 import cn.community.mapper.HOwnerMapper;
 import cn.community.mapper.ManagerMapper;
 import cn.community.mapper.StaffMapper;
-import cn.community.pojo.HOwner;
-import cn.community.pojo.Manager;
-import cn.community.pojo.Staff;
-import cn.community.pojo.User;
+import cn.community.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,11 +76,29 @@ public class UserServiceImp implements UserService {
      * @return
      */
     @Override
-    public String signIn(HOwner hOwner) {
-        int insertResult = hOwnerMapper.insert(hOwner);
-        if(insertResult <= 0){
-            return "注册失败";
+    public RegisterResult signIn(HOwner hOwner) {
+
+        int insert = hOwnerMapper.insert(hOwner);
+        RegisterResult registerResult = new RegisterResult();
+        if(insert <= 0){
+           registerResult.setMsg("注册失败");
+        }else{
+            registerResult.setMsg("login");
+            registerResult.setUserName(hOwner.getOwnerId());
         }
-        return "login";
+
+        return registerResult;
     }
+
+    /**
+     * 按业主的id他的个人信息
+     * @param ownerId
+     * @return
+     */
+    @Override
+    public HOwner searchById(int ownerId) {
+        HOwner hOwner = hOwnerMapper.selectByPrimaryKey(ownerId);
+        return hOwner;
+    }
+
 }
