@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +25,13 @@ public class IndexController {
     @Autowired
     MaintainService maintainService;
 
-    @RequestMapping("/index/{OwnerId}")
-    public String loadData(@PathVariable("OwnerId") Integer ownerId, Map<String, Object> map) {
+    @RequestMapping("/index")
+    public String loadData(Map<String, Object> map, HttpSession session) {
+//        将session中的内容取出来
+        if (null == session) {
+            return "login";
+        }
+        Integer ownerId = (Integer) session.getAttribute("userId");
 //        获取所有的新闻数据
         List<News> allNews = newsService.getAllNews();
 //      获取用户的停车信息
