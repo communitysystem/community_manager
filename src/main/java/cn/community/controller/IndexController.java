@@ -4,7 +4,6 @@ import cn.community.c_interface.*;
 import cn.community.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +28,7 @@ public class IndexController {
     public String loadData(Map<String, Object> map, HttpSession session) {
 //        将session中的内容取出来
         if (null == session) {
-            return "login";
+            return "redirect:/login";
         }
         Integer ownerId = (Integer) session.getAttribute("userId");
 //        获取所有的新闻数据

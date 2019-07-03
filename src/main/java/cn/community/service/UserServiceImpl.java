@@ -41,7 +41,10 @@ public class UserServiceImpl implements UserService {
                 }else if(!manager.getManagerPassword().equals(user.getPassword())){
                     return "密码错误";
                 }else {
+
                     return "managerIndex";
+
+
                 }
             }
 
@@ -62,7 +65,7 @@ public class UserServiceImpl implements UserService {
                 }else if(!staff.getStaffName().equals(user.getPassword())){
                     return "密码错误";
                 }else {
-                    return "/index";
+                    return "redirect:/index";
                 }
             }
         }

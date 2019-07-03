@@ -36,4 +36,6 @@ public interface ComplaintMapper {
     int updateByPrimaryKeyWithBLOBs(Complaint record);
 
     int updateByPrimaryKey(Complaint record);
+
+    int updateByPriMaryKeyAndComment(@Param("complaintId") String complaintId, @Param("complaintComment") String complaintComment);
 }
