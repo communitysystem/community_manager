@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.community.mapper.CarPortMapper">
   <resultMap id="BaseResultMap" type="cn.community.pojo.CarPort">
-    <id column="port_id" jdbcType="VARCHAR" property="portId" />
+    <result column="port_id" jdbcType="VARCHAR" property="portId" />
     <result column="owner_Id" jdbcType="INTEGER" property="ownerId" />
     <result column="port_stat" jdbcType="CHAR" property="portStat" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    port_id, owner_Id, port_stat
+    port_id, owner_Id, port_stat, start_date, end_date
   </sql>
   <select id="selectByExample" parameterType="cn.community.pojo.CarPortExample" resultMap="BaseResultMap">
     select
@@ -81,16 +83,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from car_port
-    where port_id = #{portId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from car_port
-    where port_id = #{portId,jdbcType=VARCHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="cn.community.pojo.CarPortExample">
     delete from car_port
     <if test="_parameter != null">
@@ -98,10 +90,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.community.pojo.CarPort">
-    insert into car_port (port_id, owner_Id, port_stat
-      )
-    values (#{portId,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{portStat,jdbcType=CHAR}
-      )
+    insert into car_port (port_id, owner_Id, port_stat, 
+      start_date, end_date)
+    values (#{portId,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{portStat,jdbcType=CHAR}, 
+      #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="cn.community.pojo.CarPort">
     insert into car_port
@@ -115,6 +107,12 @@
       <if test="portStat != null">
         port_stat,
       </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="portId != null">
@@ -125,6 +123,12 @@
       </if>
       <if test="portStat != null">
         #{portStat,jdbcType=CHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -146,6 +150,12 @@
       <if test="record.portStat != null">
         port_stat = #{record.portStat,jdbcType=CHAR},
       </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=DATE},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,27 +165,15 @@
     update car_port
     set port_id = #{record.portId,jdbcType=VARCHAR},
       owner_Id = #{record.ownerId,jdbcType=INTEGER},
-      port_stat = #{record.portStat,jdbcType=CHAR}
+      port_stat = #{record.portStat,jdbcType=CHAR},
+      start_date = #{record.startDate,jdbcType=DATE},
+      end_date = #{record.endDate,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.community.pojo.CarPort">
-    update car_port
-    <set>
-      <if test="ownerId != null">
-        owner_Id = #{ownerId,jdbcType=INTEGER},
-      </if>
-      <if test="portStat != null">
-        port_stat = #{portStat,jdbcType=CHAR},
-      </if>
-    </set>
-    where port_id = #{portId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.community.pojo.CarPort">
-    update car_port
-    set owner_Id = #{ownerId,jdbcType=INTEGER},
-      port_stat = #{portStat,jdbcType=CHAR}
-    where port_id = #{portId,jdbcType=VARCHAR}
-  </update>
+
+  <select id="selectAllCartPort" parameterType="int" resultMap="BaseResultMap">
+    select * from car_port limit #{start},11
+  </select>
 </mapper>

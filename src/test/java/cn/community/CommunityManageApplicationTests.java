@@ -28,6 +28,8 @@ public class CommunityManageApplicationTests {
     @Autowired
     MaintainService maintainService;
 
+
+
     @Test
     public void contextLoads() {
         List<News> allNews = newsService.getAllNews();
@@ -58,5 +60,10 @@ public class CommunityManageApplicationTests {
     public void testMaintainService() {
         Maintain maintainByownId = maintainService.getMaintainByownId(5900);
         System.out.println("maintainByownId = " + maintainByownId);
+    }
+
+    @Test
+    public void countCarPort(){
+        System.out.println(carPortService.countAll());
     }
 }
