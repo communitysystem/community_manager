@@ -27,6 +27,4 @@ public class ArrearageServiceImpl implements ArrearageService {
             return new Arrearage();
         }
     }
-
-
 }

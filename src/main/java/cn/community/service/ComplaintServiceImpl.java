@@ -39,4 +39,14 @@ public class ComplaintServiceImpl implements ComplaintService {
     public void delComplantById(String id) {
         complaintMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public void upDataComplantById(String complaintId, String complaintComment) throws Exception {
+        complaintMapper.updateByPriMaryKeyAndComment(complaintId, complaintComment);
+    }
+
+    @Override
+    public void addComplaintComment(Complaint complaint) throws Exception {
+        complaintMapper.insert(complaint);
+    }
 }

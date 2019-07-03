@@ -11,4 +11,8 @@ public interface ComplaintService {
     public List<Complaint> getAllComplaint(Integer ownerId);
 
     void delComplantById(String id) throws Exception;
+
+    void upDataComplantById(String complaintId, String complaintComment) throws Exception;
+
+    void addComplaintComment(Complaint complaint) throws Exception;
 }

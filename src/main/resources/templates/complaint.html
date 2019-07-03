@@ -753,11 +753,59 @@
         </section>
         <!-- 内容头部 /-->
 
+
         <!-- 正文区域 -->
         <section class="content">
             <!--label显示的内容-->
             <div class="tab-pane active" id="tab-label">
                 <h5>投诉</h5>
+                <!--投诉弹框-->
+                <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
+                        data-target="#myModal">
+                    投诉
+                </button>
+
+                <div id="myModal" class="modal modal-primary" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">输入投诉内容：</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="box-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="inputNumber2" class="col-sm-2 control-label">投诉内容:</label>
+                                            <div class="col-sm-5">
+                                                <div class="input-group">
+                                                    <div class="col-md-10 data rowHeight2x">
+                                                        <textarea id="complaintComment" name="complaintComment"
+                                                                  class="form-control" rows="5"
+                                                                  placeholder="请输入..." style="width: auto"
+                                                                  cols="70"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-outline" id="add" onclick="add()"
+                                        data-dismiss="modal">保存
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+
+                    <!-- /.modal-dialog -->
+                </div>
+                <!---->
                 <div class="row data-type" th:each="date:${allComplaint}">
 
                     <div class="col-md-2 title">投诉时间</div>
@@ -774,28 +822,21 @@
                     <div class="col-md-10 data text" th:text="${date.getFeedback()}">
                         无
                     </div>
+                    <form action="/complaint/updata" METHOD="post">
+                        <div class="col-md-2 title rowHeight2x">投诉内容</div>
+                        <div class="col-md-10 data rowHeight2x">
+                            <input th:value="${date.getComplaintId()}" type="hidden" name="complaintId">
+                            <textarea class="form-control" rows="3" placeholder="请输入..."
+                                      th:text="${date.getComplaintComment()}" name="complaintComment"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-block btn-warning" value="修改">
+                    </form>
 
-                    <div class="col-md-2 title rowHeight2x">投诉内容</div>
-                    <div class="col-md-10 data rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="请输入..."
-                                  th:text="${date.getComplaintComment()}" name="complaintComment"></textarea>
-                    </div>
 
-                    <div>
-                        <tr>
-                            <td>
-                                <a th:href="@{/complaint/delById(id=${date.getComplaintId()})}">
-                                    <button type="button" class="btn btn-block btn-success">撤回</button>
-                                </a>
-                            </td>
-                            <td>
-                                <a th:href="@{/complaint/updata(id=${date.getComplaintId()},complaintComment=${})}">
-                                    <button type="button" class="btn btn-block btn-warning">修改</button>
-                                </a>
+                    <a th:href="@{/complaint/delById(id=${date.getComplaintId()})}">
+                        <button type="button" class="btn btn-block btn-success">撤回</button>
+                    </a>
 
-                            </td>
-                        </tr>
-                    </div>
                 </div>
 
 
@@ -817,7 +858,25 @@
 
 </div>
 
+<script type="text/javascript">
+    /*添加投诉的请求*/
+    //complaintComment
+    function add() {
+        var content = $('#complaintComment').val()
+        $.ajax({
+            type: "POST",
+            url: "/complaint/add",
+            contentType: "application/json", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: content,  //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",
+            success: function (data) {
+                document.execCommand("Refresh")
+                alert(data.valueOf(result));
+            }
+        });
+    }
 
+</script>
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
