@@ -32,11 +32,10 @@ public class ComplaintController {
 
     @RequestMapping("/showAll")
     public String showAll(HttpSession session, Map<String, Object> map) {
-
-        if (null == session) {
+        Integer owerId = (Integer) session.getAttribute("userId");
+        if (null == owerId) {
             return "redirect:/login";
         }
-        Integer owerId = (Integer) session.getAttribute("userId");
         List<Complaint> allComplaint = complaintService.getAllComplaint(owerId);
         map.put("allComplaint", allComplaint);
         return "complaint";

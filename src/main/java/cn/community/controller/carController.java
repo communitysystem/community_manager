@@ -17,15 +17,19 @@ public class carController {
 
     @RequestMapping("/showCarPort")
     public String showInfoByownerId(HttpSession session, Map<String, Object> map) {
-
-        if (null == session) {
+        Integer ownerId = (Integer) session.getAttribute("userId");
+        if (null == ownerId) {
             return "redirect:/login";
         }
-        Integer ownerId = (Integer) session.getAttribute("userId");
 //        將用户车库的信息查询出来
         CarPort portByHid = carPortService.getCarPortByHid(ownerId);
         map.put("car", portByHid);
 
         return "carPortInfo";
+    }
+
+    @RequestMapping("/add")
+    public String add() {
+        return "";
     }
 }

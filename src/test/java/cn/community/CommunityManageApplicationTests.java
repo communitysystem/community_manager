@@ -87,4 +87,9 @@ public class CommunityManageApplicationTests {
         String format = sdf.format(now);
         System.out.println("format = " + format);
     }
+
+    @Test
+    public void testMiantain() throws Exception {
+        maintainService.add("没有水 了 ",5901);
+    }
 }

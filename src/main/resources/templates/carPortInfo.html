@@ -766,6 +766,14 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
+                        <a th:href="/carport/add">
+                            <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#myModal">
+                                申请停车位
+                            </button>
+                        </a>
+
+
                         <div class="row data-type">
                             <!--单行数据显示 非表格-->
                             <div class="col-md-2 title item-green rowHeight2x"><i class="fa fa-fw fa-car"></i>[[${session.user.getOwnerName()}]]车主

@@ -870,9 +870,12 @@
             dataType: "json", //表示返回值类型，不必须
             data: content,  //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",
             success: function (data) {
-                document.execCommand("Refresh")
-                alert(data.valueOf(result));
-            }
+                alert("投诉成功！");
+                location.reload(true)
+            },
+            error: function (data) {
+                alert("投诉失败！");
+            },
         });
     }
 

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public interface MaintainMapper {
     long countByExample(MaintainExample example);
@@ -35,4 +36,6 @@ public interface MaintainMapper {
     int updateByPrimaryKeyWithBLOBs(Maintain record);
 
     int updateByPrimaryKey(Maintain record);
+
+    void updateByMaintanId(@Param("maintainId") String maintainId, @Param("maintainInfo") String maintainInfo);
 }

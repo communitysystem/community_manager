@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -118,7 +117,7 @@
 
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="all-admin-index.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>数据</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -400,7 +399,7 @@
                     <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p th:text="${session.user.getOwnerName()}"></p>
+                    <p>张猿猿</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
@@ -421,7 +420,8 @@
             <ul class="sidebar-menu">
                 <li class="header">菜单</li>
 
-                <li id="admin-index"><a href="index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+                <li id="admin-index"><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a>
+                </li>
 
                 <!-- 菜单 -->
 
@@ -436,19 +436,19 @@
                     <ul class="treeview-menu">
 
                         <li id="admin-login">
-                            <a href="login.html">
+                            <a href="all-admin-login.html">
                                 <i class="fa fa-circle-o"></i> 登录
                             </a>
                         </li>
 
                         <li id="admin-register">
-                            <a href="hower_register.html">
+                            <a href="all-admin-register.html">
                                 <i class="fa fa-circle-o"></i> 注册
                             </a>
                         </li>
 
                         <li id="admin-404">
-                            <a href="404.html">
+                            <a href="all-admin-404.html">
                                 <i class="fa fa-circle-o"></i> 404页
                             </a>
                         </li>
@@ -460,7 +460,7 @@
                         </li>
 
                         <li id="admin-blank">
-                            <a href="all-admin-blank.html">
+                            <a href="carport.html">
                                 <i class="fa fa-circle-o"></i> 空白页
                             </a>
                         </li>
@@ -725,7 +725,7 @@
                 <!-- 菜单 /-->
 
                 <li id="admin-documentation"><a href="documentation.html" target="_blank"><i class="fa fa-book"></i>
-                    <span></span></a></li>
+                    <span>AdminLTE汉化文档</span></a></li>
 
             </ul>
         </section>
@@ -734,155 +734,117 @@
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
+    <!-- @@master = admin-layout.html-->
+    <!-- @@block = content -->
+
     <div class="content-wrapper">
 
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                控制面板
-                <small>首页</small>
+                报修信息
+                <small>报修明细</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">报修信息</a></li>
+                <li class="active">报修明细</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
 
+
         <!-- 正文区域 -->
         <section class="content">
+            <!--label显示的内容-->
+            <div class="tab-pane active" id="tab-label">
+                <h5>投诉</h5>
+                <!--投诉弹框-->
+                <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
+                        data-target="#myModal">
+                    报修
+                </button>
 
-
-            <!-- 统计数值 -->
-            <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h4 style="font-weight: bold" th:text="${car.getPortId()}"></h4>
-
-                            <p th:inline="text">车牌号:[[${session.user.getCarId()}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-car"></i>
-                        </div>
-                        <a th:href="@{/carport/showCarPort}" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h4 th:inline="text" style="font-weight: bold">欠费：[[${arrearage.getArrearageSum()}]]</h4>
-
-                            <p th:inline="text">欠费日期：[[${#dates.format(arrearage.getArrearageDate(),
-                                'yyyy-MM-dd')}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-credit-card"></i>
-                        </div>
-                        <a href="all-ad-statistics-list.html" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h4 th:inline="text" style="font-weight: bold">[[${complaint.getFeedback()}]]</h4>
-                            <!--<p th:inline="text" style="color: red">[[${complaint.getFeedback()}]]</p>-->
-                            <p> 投诉信息：[[${complaint.getComplaintComment()}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-file-text"></i>
-                        </div>
-                        <a th:href="@{/complaint/showAll}" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h4 th:inline="text">维修反馈：[[${maintain.getFeedback()}]]</h4>
-
-                            <p>维修信息:[[${maintain.getMaintainInfo()}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-wrench"></i>
-                        </div>
-                        <a href="/maintain/getAll" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-            <!-- /.row -->
-
-
-            <!-- 待处理订单 -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <i class="fa fa-cube"></i>
-                    <h3 class="box-title">最新新闻</h3>
-                </div>
-
-                <div class="box-body">
-                    <!--<a th:href="@{/news/all}" onclick="onLoad()"></a>-->
-
-                    <div class="col-md-6" th:each="news:${all}">
-                        <div class="box box-default">
-                            <div class="box-header with-border">
-                                <i class="fa fa-bullhorn"></i>
-
-                                <h3 class="box-title" th:text="${news.getTitle()}">Callouts</h3>
+                <div id="myModal" class="modal modal-primary" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">输入维修信息内容：</h4>
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="callout callout-danger">
-                                    <h4 th:text="${#dates.format(news.getNewsDate(), 'yyyy-MM-dd')}">I am a danger
-                                        callout!</h4>
+                            <div class="modal-body">
 
-                                    <p th:text="${news.getNewCommnet()}">There is a problem that we need to fix. A
-                                        wonderful serenity has taken possession
-                                        of my entire soul, like these sweet mornings of spring which I enjoy with my
-                                        whole heart.</p>
-                                    <p>信息发布者：[[${news.getManagerId()}]]</p>
+                                <div class="box-body">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="inputNumber2" class="col-sm-2 control-label">维修内容:</label>
+                                            <div class="col-sm-5">
+                                                <div class="input-group">
+                                                    <div class="col-md-10 data rowHeight2x">
+                                                        <textarea id="maintainInfo" name="complaintComment"
+                                                                  class="form-control" rows="5"
+                                                                  placeholder="请输入..." style="width: auto"
+                                                                  cols="70"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- <div class="callout callout-info">
-                                     <h4>I am an info callout!</h4>
-
-                                     <p>Follow the steps to continue to payment.</p>
-                                 </div>
-                                 <div class="callout callout-warning">
-                                     <h4>I am a warning callout!</h4>
-
-                                     <p>This is a yellow callout.</p>
-                                 </div>
-                                 <div class="callout callout-success">
-                                     <h4>I am a success callout!</h4>
-
-                                     <p>This is a green callout.</p>
-                                 </div>-->
                             </div>
-                            <!-- /.box-body -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-outline" id="add" onclick="add()"
+                                        data-dismiss="modal">保存
+                                </button>
+                            </div>
                         </div>
-                        <!-- /.box -->
+                        <!-- /.modal-content -->
                     </div>
 
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.box-body -->
+                <!---->
+                <div class="row data-type" th:each="date:${maintain}">
 
-            </div>
+                    <div class="col-md-2 title">维修费用</div>
+                    <div class="col-md-4 data text" th:inline="text">
+                        [[${date.getMaintainCharge()}]] 元
+                    </div>
+
+                    <div class="col-md-2 title">维修工人及手机号：</div>
+                    <div class="col-md-4 data text" th:text="${date.getStaffId()}">
+                        刘琪军
+                    </div>
+
+                    <div class="col-md-2 title">维修回复</div>
+                    <div class="col-md-10 data text" th:text="${date.getFeedback()}">
+                        无
+                    </div>
+                    <form action="/maintain/update" METHOD="post">
+                        <div class="col-md-2 title rowHeight2x">维修内容</div>
+                        <div class="col-md-10 data rowHeight2x">
+                            <input th:value="${date.getMaintainId()}" type="hidden" name="maintainId">
+                            <textarea class="form-control" rows="3" placeholder="请输入..."
+                                      th:text="${date.getMaintainInfo()}" name="maintainInfo"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-block btn-warning" value="修改">
+                    </form>
+
+
+                    <a th:href="@{/maintain/delById(id=${date.getMaintainId()})}">
+                        <button type="button" class="btn btn-block btn-success">撤回</button>
+                    </a>
+
+                </div>
 
 
         </section>
         <!-- 正文区域 /-->
 
     </div>
+    <!-- @@close -->
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
@@ -896,11 +858,28 @@
 
 </div>
 
-<script>
-    window.onload
+<script type="text/javascript">
+    /*添加投诉的请求*/
+    //complaintComment
+    function add() {
+        var content = $('#maintainInfo').val()
+        $.ajax({
+            type: "POST",
+            url: "/maintain/add",
+            contentType: "application/json", //必须有
+            dataType: "json", //表示返回值类型，不必须
+            data: content,  //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",
+            success: function (data) {
+                alert("保修成功！");
+                location.reload(true)
+            },
+            error: function (data) {
+                alert("保修失败！");
+            },
+        });
+    }
 
 </script>
-
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
 <script>
@@ -969,11 +948,9 @@
 
 
     $(document).ready(function () {
-        // 激活导航位置
-        setSidebarActive("admin-index");
+        setSidebarActive("admin-blank");
     });
 </script>
 </body>
 
 </html>
-<!---->
