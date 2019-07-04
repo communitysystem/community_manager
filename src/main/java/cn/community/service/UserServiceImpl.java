@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     ManagerMapper managerMapper;
     @Autowired
@@ -41,7 +41,10 @@ public class UserServiceImp implements UserService {
                 }else if(!manager.getManagerPassword().equals(user.getPassword())){
                     return "密码错误";
                 }else {
-                    return "redirect:/index";
+
+                    return "managerIndex";
+
+
                 }
             }
 

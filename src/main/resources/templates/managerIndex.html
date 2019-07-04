@@ -346,7 +346,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs"><p th:text="${session.user.getOwnerName()}"></p></span>
+                            <span class="hidden-xs"><p th:text="${session.user.getManagerName()}"></p></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -400,7 +400,7 @@
                     <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p th:text="${session.user.getOwnerName()}"></p>
+                    <p  th:text="${session.user.getManagerName()}"></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
@@ -753,134 +753,30 @@
 
 
             <!-- 统计数值 -->
-            <div class="row">
-                <div class="col-lg-3 col-xs-6">
+            <div class="row" >
+                <div class="col-lg-3 col-xs-6" style="height: 500px;">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h4 style="font-weight: bold" th:text="${car.getPortId()}"></h4>
+                            <h3 >停车位</h3>
 
-                            <p th:inline="text">车牌号:[[${session.user.getCarId()}]]</p>
+                          <p>&nbsp;</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-fw fa-car"></i>
                         </div>
-<<<<<<< HEAD
-                        <a href="all-carPort-manage-list.html" class="small-box-footer">详细 <i
-=======
-                        <a th:href="@{/carport/showCarPort}" class="small-box-footer">详细 <i
->>>>>>> 4ccd4eaf3c3b60df8b9ce27311ca59df51620f9c
+                        <a href="/manager/allCarPort?start=1" class="small-box-footer">详细 <i
                                 class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h4 th:inline="text" style="font-weight: bold">欠费：[[${arrearage.getArrearageSum()}]]</h4>
 
-                            <p th:inline="text">欠费日期：[[${#dates.format(arrearage.getArrearageDate(),
-                                'yyyy-MM-dd')}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-credit-card"></i>
-                        </div>
-                        <a href="all-ad-statistics-list.html" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h4 th:inline="text" style="font-weight: bold">[[${complaint.getFeedback()}]]</h4>
-                            <!--<p th:inline="text" style="color: red">[[${complaint.getFeedback()}]]</p>-->
-                            <p> 投诉信息：[[${complaint.getComplaintComment()}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-file-text"></i>
-                        </div>
-                        <a th:href="@{/complaint/showAll}" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h4 th:inline="text">维修反馈：[[${maintain.getFeedback()}]]</h4>
-
-                            <p>维修信息:[[${maintain.getMaintainInfo()}]]</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-wrench"></i>
-                        </div>
-                        <a href="/maintain/getAll" class="small-box-footer">详细 <i
-                                class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
                 <!-- ./col -->
             </div>
             <!-- /.row -->
 
 
-            <!-- 待处理订单 -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <i class="fa fa-cube"></i>
-                    <h3 class="box-title">最新新闻</h3>
-                </div>
 
-                <div class="box-body">
-                    <!--<a th:href="@{/news/all}" onclick="onLoad()"></a>-->
-
-                    <div class="col-md-6" th:each="news:${all}">
-                        <div class="box box-default">
-                            <div class="box-header with-border">
-                                <i class="fa fa-bullhorn"></i>
-
-                                <h3 class="box-title" th:text="${news.getTitle()}">Callouts</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="callout callout-danger">
-                                    <h4 th:text="${#dates.format(news.getNewsDate(), 'yyyy-MM-dd')}">I am a danger
-                                        callout!</h4>
-
-                                    <p th:text="${news.getNewCommnet()}">There is a problem that we need to fix. A
-                                        wonderful serenity has taken possession
-                                        of my entire soul, like these sweet mornings of spring which I enjoy with my
-                                        whole heart.</p>
-                                    <p>信息发布者：[[${news.getManagerId()}]]</p>
-                                </div>
-                                <!-- <div class="callout callout-info">
-                                     <h4>I am an info callout!</h4>
-
-                                     <p>Follow the steps to continue to payment.</p>
-                                 </div>
-                                 <div class="callout callout-warning">
-                                     <h4>I am a warning callout!</h4>
-
-                                     <p>This is a yellow callout.</p>
-                                 </div>
-                                 <div class="callout callout-success">
-                                     <h4>I am a success callout!</h4>
-
-                                     <p>This is a green callout.</p>
-                                 </div>-->
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-
-                </div>
-                <!-- /.box-body -->
-
-            </div>
 
 
         </section>

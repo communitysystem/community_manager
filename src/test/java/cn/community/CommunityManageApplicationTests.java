@@ -31,6 +31,8 @@ public class CommunityManageApplicationTests {
     @Autowired
     MaintainService maintainService;
 
+
+
     @Test
     public void contextLoads() {
         List<News> allNews = newsService.getAllNews();
@@ -64,6 +66,10 @@ public class CommunityManageApplicationTests {
     }
 
     @Test
+
+    public void countCarPort() {
+        System.out.println(carPortService.countAll());
+    }
     public void testComplaint() throws Exception {
         /*complaintService.upDataComplantById("0006", "66666666666");
         System.out.println(" success ");*/
@@ -86,6 +92,7 @@ public class CommunityManageApplicationTests {
         Date now = new Date();
         String format = sdf.format(now);
         System.out.println("format = " + format);
+
     }
 
     @Test
