@@ -36,22 +36,23 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 查询所有的车位信息
+     *
      * @return
      */
     @Override
     public List<CarPort> selectAllCarPort(int start) {
-        List<CarPort> carPorts = carPortMapper.selectAllCartPort((start-1)*11);
-        for(CarPort carPort : carPorts){
-            if(carPort.getOwnerId() != null){
+        List<CarPort> carPorts = carPortMapper.selectAllCartPort((start - 1) * 11);
+        for (CarPort carPort : carPorts) {
+            if (carPort.getOwnerId() != null) {
                 HOwner hOwner = hOwnerMapper.selectByPrimaryKey(carPort.getOwnerId());
                 carPort.setCarPortOwnerName(hOwner.getOwnerName());
                 carPort.setCarNum(hOwner.getCarId());
             }
-            if(carPort.getPortStat().equals("used")){
+            if (carPort.getPortStat().equals("used")) {
                 carPort.setPortStat("租用");
-            }else if(carPort.getPortStat().equals("leisure")){
+            } else if (carPort.getPortStat().equals("leisure")) {
                 carPort.setPortStat("空闲");
-            }else{
+            } else {
                 carPort.setPortStat("售出");
             }
         }
@@ -60,6 +61,7 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 统计所有的车位
+     *
      * @return
      */
     @Override
@@ -73,6 +75,7 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 删除车位
+     *
      * @param carPortId
      */
     @Override
@@ -92,6 +95,11 @@ public class CarPortServiceImpl implements CarPortService {
         String carPortId = IDUtils.genItemId();
         carPort.setPortId(carPortId);
         carPort.setPortStat("leisure");
+        carPortMapper.insert(carPort);
+    }
+
+    @Override
+    public void appaly(CarPort carPort) throws Exception {
         carPortMapper.insert(carPort);
     }
 

@@ -28,8 +28,13 @@ public class carController {
         return "carPortInfo";
     }
 
-    @RequestMapping("/add")
-    public String add() {
+    @RequestMapping("/appaly")
+    public String appaly(CarPort carPort) {
+        try {
+            carPortService.appaly(carPort);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "";
     }
 }
