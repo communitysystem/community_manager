@@ -27,10 +27,11 @@ public class IndexController {
     @RequestMapping("/index")
     public String loadData(Map<String, Object> map, HttpSession session) {
 //        将session中的内容取出来
-        if (null == session) {
+        Integer ownerId = (Integer) session.getAttribute("userId");
+        if (null == ownerId) {
             return "redirect:/login";
         }
-        Integer ownerId = (Integer) session.getAttribute("userId");
+
 //        获取所有的新闻数据
         List<News> allNews = newsService.getAllNews();
 //      获取用户的停车信息

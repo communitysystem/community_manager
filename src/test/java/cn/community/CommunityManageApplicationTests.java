@@ -96,8 +96,7 @@ public class CommunityManageApplicationTests {
     }
 
     @Test
-    public void testNewDate(){
-        CarPort carPort = new CarPort();
-        carPortService.updateCarPort(carPort,"07/04/2019 - 07/04/2019");
+    public void testMiantain() throws Exception {
+        maintainService.add("没有水 了 ",5901);
     }
 }
