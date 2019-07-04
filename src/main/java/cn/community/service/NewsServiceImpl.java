@@ -27,4 +27,25 @@ public class NewsServiceImpl implements NewsService {
     public News getNewsBycontent(String content) {
         return null;
     }
+
+    @Override
+    public void delById(String newsId) throws Exception {
+        newsMapper.deleteByPrimaryKey(newsId);
+    }
+
+    @Override
+    public News getNewsById(String newsId) {
+        News news = newsMapper.selectByPrimaryKey(newsId);
+        return news;
+    }
+
+    @Override
+    public void save(News news) {
+        newsMapper.updateByPrimaryKeyWithBLOBs(news);
+    }
+
+    @Override
+    public void add(News news) {
+        newsMapper.insert(news);
+    }
 }
