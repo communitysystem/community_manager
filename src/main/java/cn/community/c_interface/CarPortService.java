@@ -14,24 +14,26 @@ public interface CarPortService {
 
     /**
      * 统计车位的个数
-     *
      * @return
      */
     public long countAll();
 
     /**
      * 删除车位
-     *
      * @param carPortId
      */
     public void deleteCarPort(String carPortId);
 
     /**
      * 添加停车位
-     *
      * @
      */
     public void addCarPort();
 
-    void appaly(CarPort carPort) throws Exception;
+    /**
+     * 更新车位信息
+     * @param carPort
+     * @param dateInterval
+     */
+    public String updateCarPort(CarPort carPort,String dateInterval);
 }
