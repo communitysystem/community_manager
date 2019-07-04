@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -93,6 +95,32 @@ public class CarPortServiceImpl implements CarPortService {
         carPort.setPortId(carPortId);
         carPort.setPortStat("leisure");
         carPortMapper.insert(carPort);
+    }
+
+    /**
+     * 更新车位信息
+     * @param carPort
+     * @param dateInterval
+     */
+    @Override
+    public String updateCarPort(CarPort carPort, String dateInterval) {
+        HOwner hOwner = hOwnerMapper.selectByPrimaryKey(carPort.getOwnerId());
+        if(null != carPort.getOwnerId() && !("".equals(carPort.getOwnerId()))){
+            if(hOwner == null ){
+                return "没有业主";
+            }
+        }else{
+            String[] split = dateInterval.split("-");
+            carPort.setStartDate(new Date(split[0]));
+            carPort.setEndDate(new Date(split[1]));
+            CarPortExample example = new CarPortExample();
+            CarPortExample.Criteria criteria = example.createCriteria();
+            criteria.andPortIdEqualTo(carPort.getPortId());
+            carPortMapper.updateByExample(carPort,example);
+            return "更新成功";
+        }
+
+        return "更新成功";
     }
 
 

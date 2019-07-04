@@ -94,4 +94,10 @@ public class CommunityManageApplicationTests {
         System.out.println("format = " + format);
 
     }
+
+    @Test
+    public void testNewDate(){
+        CarPort carPort = new CarPort();
+        carPortService.updateCarPort(carPort,"07/04/2019 - 07/04/2019");
+    }
 }

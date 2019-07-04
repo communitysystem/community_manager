@@ -29,4 +29,11 @@ public interface CarPortService {
      * @
      */
     public void addCarPort();
+
+    /**
+     * 更新车位信息
+     * @param carPort
+     * @param dateInterval
+     */
+    public String updateCarPort(CarPort carPort,String dateInterval);
 }

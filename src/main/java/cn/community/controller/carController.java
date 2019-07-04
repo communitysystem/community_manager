@@ -56,8 +56,18 @@ public class carController {
      */
     @RequestMapping("/updateCarPort")
     public String updateCarPort(String carPortId,Map<String,Object> map){
-        System.out.println(carPortId);
         map.put("carPortId",carPortId);
         return "updateCarPort";
+    }
+    @RequestMapping("/updateCarPortSubmit")
+    public String updateCarPortSubmit(CarPort carPort,String dateInterval,Map<String,Object> map){
+        String msg = carPortService.updateCarPort(carPort, dateInterval);
+        System.out.println(msg);
+        if("没有业主".equals(msg)){
+            map.put("carPortId",carPort.getPortId());
+            return "redirect:/carport/updateCarPort";
+        }
+
+        return "redirect:/manager/allCarPort?start=1";
     }
 }
