@@ -790,10 +790,10 @@
                                 <th class="" style="padding-right:0px;">
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
-                                <th class="sorting">新闻编号</th>
-                                <th class="sorting">新闻标题</th>
-                                <th class="sorting">新闻时间</th>
-                                <th class="sorting">新闻内容</th>
+                                <th class="sorting">员工编号</th>
+                                <th class="sorting">员工姓名</th>
+                                <th class="sorting">员工手机</th>
+                                <th class="sorting">员工性别</th>
 
                                 <th class="text-center">操作</th>
                             </tr>
@@ -803,21 +803,21 @@
 
                             <tr th:each="date:${all}">
                                 <td><input name="ids" type="checkbox"></td>
-                                <td th:text="${date.getNewsId()}">
+                                <td th:text="${date.getStaffId()}">
 
                                 </td>
-                                <td th:text="${date.getTitle()}">71837383</td>
-                                <td th:text="${#dates.format(date.getNewsDate(),'yyyy-MM-dd')}">北京一日游</td>
-                                <td th:text="${date.getNewCommnet()}">￥1000</td>
+                                <td th:text="${date.getStaffName()}">￥1000</td>
+                                <td th:text="${date.getIphone()}">71837383</td>
+                                <td th:text="${date.getSex()}">北京一日游</td>
 
                                 <td class="text-center">
-                                    <a th:href="@{/news/delById(newsId=${date.getNewsId()})}">
+                                    <a th:href="@{/staff/delById(id=${date.getStaffId()})}">
                                         <button type="button" class="btn bg-olive btn-xs"
                                         >删除
                                         </button>
                                     </a>
 
-                                    <a th:href="@{/news/update(newsId=${date.getNewsId()})}">
+                                    <a th:href="@{/staff/updataPage(id=${date.getStaffId()})}">
                                         <button type="button" class="btn bg-olive btn-xs"
                                         >修改
                                         </button>

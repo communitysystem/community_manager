@@ -18,5 +18,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/applyCarPort").setViewName("applyCarPort");
         registry.addViewController("/newsaddPage").setViewName("newsadd");
 
+        registry.addViewController("/staffaddPage").setViewName("StaffAdd");
+
     }
 }
