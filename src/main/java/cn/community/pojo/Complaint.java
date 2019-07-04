@@ -14,6 +14,17 @@ public class Complaint implements Serializable {
 
     private String feedback = "暂未回复";
 
+    public String getComplainterName() {
+        return ComplainterName;
+    }
+
+    public void setComplainterName(String complainterName) {
+        ComplainterName = complainterName;
+    }
+
+    //自己添加属性
+    private String ComplainterName;
+
     private static final long serialVersionUID = 1L;
 
     public String getComplaintId() {

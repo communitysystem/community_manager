@@ -54,6 +54,7 @@ public class UserController {
     public String signIn(HOwner hOwner,Map<String,Object> map){
         RegisterResult registerResult =  userService.signIn(hOwner);
         String msg = registerResult.getMsg();
+
         if("login".equals(msg)){
             map.put("userId",registerResult.getUserName());
             map.put("warningInfo","这是您的账号，请牢记！");

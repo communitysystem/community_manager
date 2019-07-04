@@ -15,4 +15,21 @@ public interface ComplaintService {
     void upDataComplantById(String complaintId, String complaintComment) throws Exception;
 
     void addComplaintComment(Complaint complaint) throws Exception;
+
+    /**
+     * 查询所有的投诉
+     */
+    public List<Complaint> selectAllComplaint();
+
+    /**
+     * 删除投诉
+     */
+    public void deleteComplaint(String complaintId);
+
+    /**
+     * 回复投诉
+     * @param complaintId
+     * @param content
+     */
+    public void rebackComplaint(String complaintId,String content);
 }

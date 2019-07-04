@@ -7,6 +7,7 @@ import cn.community.utils.IDUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ import java.util.Map;
 public class ComplaintController {
     @Autowired
     ComplaintService complaintService;
+
 
     @RequestMapping("/showAll")
     public String showAll(HttpSession session, Map<String, Object> map) {
@@ -96,5 +98,41 @@ public class ComplaintController {
         //        complaintService.addComplaintComment
         map.put("result", "投诉成功");
         return resString;
+    }
+
+
+    /**
+     * 查询出所有的投诉
+     */
+
+    @RequestMapping("/selectAllComplaint")
+    public String selectAllComplaint(Map<String, Object> map){
+        List<Complaint> complaints = complaintService.selectAllComplaint();
+        map.put("complaints",complaints);
+        return "allComplaint";
+    }
+
+    /**
+     * 删除投诉
+     */
+    @RequestMapping("/deleteComplaint")
+    public String deleteComplaint(String complaintId){
+        System.out.println("hello");
+        complaintService.deleteComplaint(complaintId);
+        return "redirect:/complaint/selectAllComplaint";
+    }
+
+    /**
+     * 回复投诉
+     */
+    @RequestMapping("/reback")
+    public String reback(String complaintId, Map<String, Object> map){
+        map.put("complaintId",complaintId);
+        return "rebackComplaint";
+    }
+    @RequestMapping("/rebackComplaint")
+    public String rebackComplaint(String feedback,String complaintId){
+        complaintService.rebackComplaint(complaintId,feedback);
+        return "redirect:/complaint/selectAllComplaint";
     }
 }

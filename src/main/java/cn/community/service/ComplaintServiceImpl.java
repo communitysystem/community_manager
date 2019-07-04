@@ -3,8 +3,10 @@ package cn.community.service;
 
 import cn.community.c_interface.ComplaintService;
 import cn.community.mapper.ComplaintMapper;
+import cn.community.mapper.HOwnerMapper;
 import cn.community.pojo.Complaint;
 import cn.community.pojo.ComplaintExample;
+import cn.community.pojo.HOwner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class ComplaintServiceImpl implements ComplaintService {
     @Autowired
     ComplaintMapper complaintMapper;
+    @Autowired
+    HOwnerMapper hOwnerMapper;
 
     public Complaint getComplaintByOwnId(Integer ownerId) {
         ComplaintExample complaintExample = new ComplaintExample();
@@ -48,5 +52,43 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public void addComplaintComment(Complaint complaint) throws Exception {
         complaintMapper.insert(complaint);
+    }
+
+    /**
+     * 查询出所有的投诉
+     * @return
+     */
+    @Override
+    public List<Complaint> selectAllComplaint() {
+        ComplaintExample example = new ComplaintExample();
+        ComplaintExample.Criteria criteria = example.createCriteria();
+        criteria.andComplaintIdIsNotNull();
+        List<Complaint> complaints = complaintMapper.selectByExampleWithBLOBs(example);
+        for(Complaint c : complaints){
+            HOwner hOwner = hOwnerMapper.selectByPrimaryKey(c.getOwnerId());
+            if(hOwner != null){
+                c.setComplainterName(hOwner.getOwnerName());
+            }
+
+        }
+        return complaints;
+    }
+
+    @Override
+    public void deleteComplaint(String complaintId) {
+        complaintMapper.deleteByPrimaryKey(complaintId);
+    }
+
+    @Override
+    public void rebackComplaint(String complaintId, String content) {
+        Complaint complaint = new Complaint();
+        ComplaintExample example = new ComplaintExample();
+        ComplaintExample.Criteria criteria = example.createCriteria();
+        criteria.andComplaintIdEqualTo(complaintId);
+        List<Complaint> complaints = complaintMapper.selectByExampleWithBLOBs(example);
+        complaint = complaints.get(0);
+        complaint.setComplaintId(complaintId);
+        complaint.setFeedback(content);
+        complaintMapper.updateByPrimaryKeySelective(complaint);
     }
 }
