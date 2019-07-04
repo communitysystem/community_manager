@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,23 +38,22 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 查询所有的车位信息
-     *
      * @return
      */
     @Override
     public List<CarPort> selectAllCarPort(int start) {
-        List<CarPort> carPorts = carPortMapper.selectAllCartPort((start - 1) * 11);
-        for (CarPort carPort : carPorts) {
-            if (carPort.getOwnerId() != null) {
+        List<CarPort> carPorts = carPortMapper.selectAllCartPort((start-1)*11);
+        for(CarPort carPort : carPorts){
+            if(carPort.getOwnerId() != null){
                 HOwner hOwner = hOwnerMapper.selectByPrimaryKey(carPort.getOwnerId());
                 carPort.setCarPortOwnerName(hOwner.getOwnerName());
                 carPort.setCarNum(hOwner.getCarId());
             }
-            if (carPort.getPortStat().equals("used")) {
+            if(carPort.getPortStat().equals("used")){
                 carPort.setPortStat("租用");
-            } else if (carPort.getPortStat().equals("leisure")) {
+            }else if(carPort.getPortStat().equals("leisure")){
                 carPort.setPortStat("空闲");
-            } else {
+            }else{
                 carPort.setPortStat("售出");
             }
         }
@@ -61,7 +62,6 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 统计所有的车位
-     *
      * @return
      */
     @Override
@@ -75,7 +75,6 @@ public class CarPortServiceImpl implements CarPortService {
 
     /**
      * 删除车位
-     *
      * @param carPortId
      */
     @Override
@@ -98,9 +97,30 @@ public class CarPortServiceImpl implements CarPortService {
         carPortMapper.insert(carPort);
     }
 
+    /**
+     * 更新车位信息
+     * @param carPort
+     * @param dateInterval
+     */
     @Override
-    public void appaly(CarPort carPort) throws Exception {
-        carPortMapper.insert(carPort);
+    public String updateCarPort(CarPort carPort, String dateInterval) {
+        HOwner hOwner = hOwnerMapper.selectByPrimaryKey(carPort.getOwnerId());
+        if(null != carPort.getOwnerId() && !("".equals(carPort.getOwnerId()))){
+            if(hOwner == null ){
+                return "没有业主";
+            }
+        }else{
+            String[] split = dateInterval.split("-");
+            carPort.setStartDate(new Date(split[0]));
+            carPort.setEndDate(new Date(split[1]));
+            CarPortExample example = new CarPortExample();
+            CarPortExample.Criteria criteria = example.createCriteria();
+            criteria.andPortIdEqualTo(carPort.getPortId());
+            carPortMapper.updateByExample(carPort,example);
+            return "更新成功";
+        }
+
+        return "更新成功";
     }
 
 

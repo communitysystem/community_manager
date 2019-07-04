@@ -17,10 +17,11 @@ public class carController {
 
     @RequestMapping("/showCarPort")
     public String showInfoByownerId(HttpSession session, Map<String, Object> map) {
-        Integer ownerId = (Integer) session.getAttribute("userId");
-        if (null == ownerId) {
+
+        if (null == session) {
             return "redirect:/login";
         }
+        Integer ownerId = (Integer) session.getAttribute("userId");
 //        將用户车库的信息查询出来
         CarPort portByHid = carPortService.getCarPortByHid(ownerId);
         map.put("car", portByHid);
@@ -28,13 +29,45 @@ public class carController {
         return "carPortInfo";
     }
 
-    @RequestMapping("/appaly")
-    public String appaly(CarPort carPort) {
-        try {
-            carPortService.appaly(carPort);
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     * 删除车位信息
+     * @param carPortId
+     */
+
+    @RequestMapping("/deleteCarPort")
+    public String deleteCarPort(String carPortId){
+        carPortService.deleteCarPort(carPortId);
+        return "redirect:/manager/allCarPort?start=1";
+    }
+
+    /**
+     * 添加车位
+     * @return
+     */
+    @RequestMapping("/addCarPort")
+    public String addCarPort(){
+        carPortService.addCarPort();
+        return "redirect:/manager/allCarPort?start=1";
+    }
+
+    /**
+     * 编辑车位
+     * @return
+     */
+    @RequestMapping("/updateCarPort")
+    public String updateCarPort(String carPortId,Map<String,Object> map){
+        map.put("carPortId",carPortId);
+        return "updateCarPort";
+    }
+    @RequestMapping("/updateCarPortSubmit")
+    public String updateCarPortSubmit(CarPort carPort,String dateInterval,Map<String,Object> map){
+        String msg = carPortService.updateCarPort(carPort, dateInterval);
+        System.out.println(msg);
+        if("没有业主".equals(msg)){
+            map.put("carPortId",carPort.getPortId());
+            return "redirect:/carport/updateCarPort";
         }
-        return "";
+
+        return "redirect:/manager/allCarPort?start=1";
     }
 }
