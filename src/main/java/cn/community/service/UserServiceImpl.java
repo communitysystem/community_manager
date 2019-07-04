@@ -2,11 +2,16 @@ package cn.community.service;
 
 import cn.community.c_interface.UserService;
 import cn.community.mapper.HOwnerMapper;
+import cn.community.mapper.HouseMapper;
 import cn.community.mapper.ManagerMapper;
 import cn.community.mapper.StaffMapper;
 import cn.community.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,6 +21,8 @@ public class UserServiceImpl implements UserService {
     StaffMapper staffMapper;
     @Autowired
     HOwnerMapper hOwnerMapper;
+    @Autowired
+    HouseMapper houseMapper;
 
     /**
      * 用户登录
@@ -103,5 +110,53 @@ public class UserServiceImpl implements UserService {
         HOwner hOwner = hOwnerMapper.selectByPrimaryKey(ownerId);
         return hOwner;
     }
+
+    /**
+     * 查询所有的业主信息
+     * @return
+     */
+    @Override
+    public List<HOwner> selectAllOwner() {
+        HOwnerExample example = new HOwnerExample();
+        HOwnerExample.Criteria criteria = example.createCriteria();
+        criteria.andOwnerIdIsNotNull();
+        List<HOwner> hOwners = hOwnerMapper.selectByExample(example);
+        for(HOwner h : hOwners){
+            if("male".equals(h.getSex())){
+                h.setSex("男");
+            }else {
+                h.setSex("女");
+            }
+            HouseExample example1 = new HouseExample();
+            HouseExample.Criteria criteria1 = example1.createCriteria();
+            criteria1.andOwnerIdEqualTo(h.getOwnerId());
+            List<House> houses = houseMapper.selectByExample(example1);
+            if(houses != null && houses.size() > 0){
+                h.setHouseInfo(houses.get(0).getHouseId());
+            }
+
+        }
+
+        return hOwners;
+    }
+
+    /**
+     * 删除业主
+     * @param ownerId
+     */
+    @Override
+    public void deleteOwner(int ownerId) {
+        hOwnerMapper.deleteByPrimaryKey(ownerId);
+    }
+    /**
+     * 更新业主信息
+     */
+    @Override
+    public void updateOwner(HOwner hOwner) {
+        hOwnerMapper.updateByPrimaryKeySelective(hOwner);
+    }
+
+
+
 
 }

@@ -3,9 +3,10 @@ package cn.community.mapper;
 import cn.community.pojo.House;
 import cn.community.pojo.HouseExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface HouseMapper {
     long countByExample(HouseExample example);
 

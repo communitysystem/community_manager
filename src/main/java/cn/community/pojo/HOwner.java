@@ -16,6 +16,16 @@ public class HOwner implements Serializable {
     private Integer age;
 
     private String carId;
+    //自己添加的属性
+    private String houseInfo;
+
+    public String getHouseInfo() {
+        return houseInfo;
+    }
+
+    public void setHouseInfo(String houseInfo) {
+        this.houseInfo = houseInfo;
+    }
 
     private static final long serialVersionUID = 1L;
 

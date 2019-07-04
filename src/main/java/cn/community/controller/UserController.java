@@ -5,11 +5,14 @@ import cn.community.c_interface.StaffService;
 import cn.community.c_interface.UserService;
 import cn.community.mapper.StaffMapper;
 import cn.community.pojo.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -62,5 +65,51 @@ public class UserController {
         }
 
 
+    }
+
+    /**
+     * 查询所有的业主信息
+     */
+    @RequestMapping("/allOwner")
+    public String selectAllOWner(Map<String, Object> map){
+        List<HOwner> hOwners = userService.selectAllOwner();
+        map.put("hOwners",hOwners);
+        return "allOwner";
+    }
+
+    /**
+     * 删除业主
+     * @param ownerId
+     * @return
+     */
+    @RequestMapping("/deleteOwner")
+    public String deleteOwner(String ownerId){
+        System.out.println("hello");
+        userService.deleteOwner(Integer.valueOf(ownerId));
+        System.out.println(ownerId);
+        return "redirect:/user/allOwner";
+    }
+
+    /**
+     * 更业主信息
+     * @param ownerId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/updateOwner")
+    public String  updateOwner(String ownerId, Map<String,Object> map){
+
+        map.put("ownerId",ownerId);
+        return "updateOwner";
+    }
+    @RequestMapping("/updateSubmit")
+    public String updateOwnerSubmit(HOwner hOwner){
+         
+        System.out.println(hOwner.getOwnerId());
+        userService.updateOwner(hOwner);
+        System.out.println(hOwner.getOwnerId());
+        System.out.println(hOwner.getOwnerName());
+        System.out.println(hOwner.getSex());
+        return "redirect:/user/allOwner";
     }
 }

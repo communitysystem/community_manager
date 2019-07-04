@@ -30,7 +30,13 @@ public class CommunityManageApplicationTests {
 
     @Autowired
     MaintainService maintainService;
+    @Autowired
+    UserService userService;
 
+    @Test
+    public void testDeleteOwner(){
+        userService.deleteOwner(5915);
+    }
 
 
     @Test

@@ -5,6 +5,7 @@ import cn.community.pojo.RegisterResult;
 import cn.community.pojo.User;
 import org.apache.logging.log4j.message.Message;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
@@ -25,4 +26,20 @@ public interface UserService {
      * 根据用户id查询所有的用户信息
      */
     public HOwner searchById(int ownerId);
+
+    /**
+     * 查询所有的业主信息
+     */
+    public List<HOwner> selectAllOwner();
+
+    /**
+     * 删除用户
+     */
+    public void deleteOwner(int ownerId);
+
+    /**
+     * 更新业主信息
+     * @param hOwner
+     */
+    public void updateOwner(HOwner hOwner);
 }
