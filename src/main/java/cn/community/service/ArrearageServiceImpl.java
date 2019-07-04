@@ -27,4 +27,17 @@ public class ArrearageServiceImpl implements ArrearageService {
             return new Arrearage();
         }
     }
+
+    @Override
+    public List<Arrearage> getAll() {
+        ArrearageExample arrearageExample = new ArrearageExample();
+        arrearageExample.createCriteria().andArrearageIdIsNotNull();
+        List<Arrearage> arrearages = arrearageMapper.selectByExample(arrearageExample);
+        return arrearages;
+    }
+
+    @Override
+    public void delById(String id) {
+        arrearageMapper.deleteByPrimaryKey(id);
+    }
 }
