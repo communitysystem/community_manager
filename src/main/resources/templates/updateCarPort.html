@@ -128,7 +128,7 @@
 
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="all-admin-index.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>数据</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -422,7 +422,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">菜单</li>
 
-                    <li id="admin-index"><a href="index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+                    <li id="admin-index"><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
                     <!-- 菜单 -->
 
@@ -438,19 +438,19 @@
                         <ul class="treeview-menu">
 
                             <li id="admin-login">
-                                <a href="login.html">
+                                <a href="all-admin-login.html">
                             <i class="fa fa-circle-o"></i> 登录
                         </a>
                             </li>
 
                             <li id="admin-register">
-                                <a href="hower_register.html">
+                                <a href="all-admin-register.html">
                             <i class="fa fa-circle-o"></i> 注册
                         </a>
                             </li>
 
                             <li id="admin-404">
-                                <a href="404.html">
+                                <a href="all-admin-404.html">
                             <i class="fa fa-circle-o"></i> 404页
                         </a>
                             </li>
@@ -664,7 +664,7 @@
                         <ul class="treeview-menu">
 
                             <li id="order-manage">
-                                <a href="all-carPort-manage-list.html">
+                                <a href="all-order-manage-list.html">
                             <i class="fa fa-circle-o"></i> 全部订单
                         </a>
                             </li>
@@ -743,18 +743,21 @@
         <!-- 导航侧栏 /-->
 
         <!-- 内容区域 -->
+        <!-- @@master = admin-layout.html-->
+        <!-- @@block = content -->
+
         <div class="content-wrapper">
 
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    车位管理
-                    <small>全部车位</small>
+                    模块名称
+                    <small>模块功能</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li><a href="all-carPort-manage-list.html">订单管理</a></li>
-                    <li class="active">全部订单</li>
+                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="#">模块名称</a></li>
+                    <li class="active">模块功能</li>
                 </ol>
             </section>
             <!-- 内容头部 /-->
@@ -762,151 +765,106 @@
             <!-- 正文区域 -->
             <section class="content">
 
-                <!-- .box-body -->
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">列表</h3>
-                    </div>
 
                     <div class="box-body">
 
-                        <!-- 数据表格 -->
-                        <div class="table-box">
+                        <div class="col-md-6">
+                            <!-- Horizontal Form -->
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">车位信息表</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <!-- form start -->
+                                <form class="form-horizontal">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">车位主人</label>
 
-                            <!--工具栏-->
-                            <div class="pull-left">
-                                <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <a href="/carport/addCarPort"><button type="button" class="btn btn-default" title="新建" ><i class="fa fa-file-o"></i> 新建</button></a>
-                                       <!-- <a href="/carport/deleteCarPort"><button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button></a>-->
-                                        <a href="/manager/allCarPort?start=1"><button type="button" class="btn btn-default" title="刷新"><i class="fa fa-refresh"></i> 刷新</button></a>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputEmail3" th:name="ownerId" th:value="${carPortId}" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">车牌号码</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputPassword3" placeholder="车牌号" th:name="carNum">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">车位状态</label>
+
+                                            <div class="col-sm-10">
+                                                <div class="form-group form-inline">
+                                                    <div class="radio"><label><input type="radio" name="portStat" value="sale"> 出售</label></div>
+                                                    <div class="radio"><label><input type="radio" name="portStat" value="used"> 租用</label></div>
+                                                    <div class="radio"><label><input type="radio" name="portStat" value="leisure" checked="true"> 空闲</label></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <!--日期控件-->
+                                        <div class="tab-pane" id="tab-date" style="width: 1000px">
+
+
+                                            <div class="col-md-2 title">租用/<font style="color: red">到期</font></div>
+                                                <div class="col-md-4 data" style="width: 400px">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control pull-right" id="reservation">
+                                                    </div>
+                                                </div>
+
+
+
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     </div>
-                                </div>
-                            </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
-                            <!--工具栏/-->
-
-                            <!--数据列表-->
-                            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                                <thead>
-                                    <tr>
-                                        <!--  <th class="" style="padding-right:0px;">
-                                         <input id="selall" type="checkbox" class="icheckbox_square-blue">
-                                        </th>-->
-                                        <th class="sorting_asc">车位号</th>
-                                        <th class="sorting">车位主人</th>
-                                        <th class="sorting">车牌号</th>
-                                        <th class="sorting">车位状态</th>
-                                        <th class="sorting">租用时间</th>
-                                        <th class="sorting">到期时间</th>
-
-                                        <th class="text-center">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <div  th:each="date:${carPorts}" >
-                                        <tr>
-                                           <!-- <td><input name="ids" type="checkbox"></td>-->
-                                            <td th:text="${date.getPortId()}" th:name="carPortId">
-                                            </td>
-                                            <td th:text="${date.getCarPortOwnerName()}"></td>
-                                            <td th:text="${date.getCarNum()}"></td>
-                                            <td th:text="${date.getPortStat()}"></td>
-                                            <td th:text="${#dates.format(date.getStartDate(),'yyyy-MM-dd')}"></td>
-                                            <td th:text="${#dates.format(date.getEndDate(),'yyyy-MM-dd')}"></td>
-
-                                            <td class="text-center">
-                                                <a th:href="@{/carport/updateCarPort(carPortId=${date.getPortId()})}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>编辑</button></a>
-                                                <a th:href="@{/carport/deleteCarPort(carPortId=${date.getPortId()})}"> <button type="button" class="btn bg-olive btn-xs" >删除</button></a>
-
-                                            </td>
-                                        </tr>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-default">取消</button>
+                                        <button type="submit" class="btn btn-info pull-right">提交</button>
                                     </div>
-
-
-
-
-                                </tbody>
-                                <!--
-                            <tfoot>
-                            <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
-                            <th>CSS grade</th>
-                            </tr>
-                            </tfoot>-->
-                            </table>
-                            <!--数据列表/-->
-
-                            <!--工具栏-->
-                            <!--<div class="pull-left">
-                                <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                        <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                    </div>
-                                </div>
+                                    <!-- /.box-footer -->
+                                </form>
                             </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>-->
-                            <!--工具栏/-->
-
-                        </div>
-                        <!-- 数据表格 /-->
-
 
                     </div>
-                    <!-- /.box-body -->
-
-                    <!-- .box-footer-->
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="form-group form-inline" th:text="'总共'+${pages}+'页'+'，总共有'+${count}+'条'" >
-
-                            </div>
-                        </div>
-
-                        <div class="box-tools pull-right">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">首页</a>
-                                </li>
-                                <li><a href="#">上一页</a></li>
-                                <div th:each="index:${pages}">
-                                <li><a href="#" th:text="${index}"></a></li>
-                                </div>
-                                <li><a href="#">下一页</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">尾页</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                    <!-- /.box-footer-->
-
-
                 </div>
-
             </section>
             <!-- 正文区域 /-->
 
         </div>
+        <!-- @@close -->
         <!-- 内容区域 /-->
 
         <!-- 底部导航 -->
@@ -976,8 +934,6 @@
                 locale: 'zh-CN'
             });
         });
-        //数据加载
-
 
 
         // 设置激活菜单
@@ -991,25 +947,212 @@
 
 
         $(document).ready(function() {
+            setSidebarActive("admin-blank");
+        });
+    </script>
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/raphael/raphael-min.js"></script>
+    <script src="../plugins/morris/morris.min.js"></script>
+    <script src="../plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../plugins/knob/jquery.knob.js"></script>
+    <script src="../plugins/daterangepicker/moment.min.js"></script>
+    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="../plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
+    <script src="../plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="../plugins/fastclick/fastclick.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script src="../plugins/adminLTE/js/app.min.js"></script>
+    <script src="../plugins/treeTable/jquery.treetable.js"></script>
+    <script src="../plugins/select2/select2.full.min.js"></script>
+    <script src="../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="../plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+    <script src="../plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/markdown.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/to-markdown.js"></script>
+    <script src="../plugins/ckeditor/ckeditor.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../plugins/chartjs/Chart.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.resize.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.categories.min.js"></script>
+    <script src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
+    <script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <script src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+    <script src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 选择框
+            $(".select2").select2();
+
+            // WYSIHTML5编辑器
+            $(".textarea").wysihtml5({
+                locale: 'zh-CN'
+            });
+        });
+
+
+        // 设置激活菜单
+        function setSidebarActive(tagUri) {
+            var liObj = $("#" + tagUri);
+            if (liObj.length > 0) {
+                liObj.parent().parent().addClass("active");
+                liObj.addClass("active");
+            }
+        }
+
+
+
+        $(document).ready(function() {
+
+            // 颜色选取器
+            $(".my-colorpicker1").colorpicker();
+            $(".my-colorpicker2").colorpicker();
+
+        });
+
+
+
+
+        $(document).ready(function() {
+            // 选择框
+            $(".select2").select2();
+        });
+
+
+
+
+        $(document).ready(function() {
+
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true,
+                language: 'zh-CN'
+            });
+
+            // datetime picker
+            $('#dateTimePicker').datetimepicker({
+                format: "mm/dd/yyyy - hh:ii",
+                autoclose: true,
+                todayBtn: true,
+                language: 'zh-CN'
+            });
+
+            //Date range picker
+            $('#reservation').daterangepicker({
+                locale: {
+                    applyLabel: '确认',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    firstDay: 1
+                },
+                opens: 'left', // 日期选择框的弹出位置
+                separator: ' 至 '
+                //showWeekNumbers : true,     // 是否显示第几周
+            });
+
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                format: 'MM/DD/YYYY h:mm A',
+                locale: {
+                    applyLabel: '确认',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    firstDay: 1
+                },
+                opens: 'right', // 日期选择框的弹出位置
+                separator: ' 至 '
+            });
+
+            //Date range as a button
+            $('#daterange-btn').daterangepicker({
+                    locale: {
+                        applyLabel: '确认',
+                        cancelLabel: '取消',
+                        fromLabel: '起始时间',
+                        toLabel: '结束时间',
+                        customRangeLabel: '自定义',
+                        firstDay: 1
+                    },
+                    opens: 'right', // 日期选择框的弹出位置
+                    separator: ' 至 ',
+                    ranges: {
+                        '今日': [moment(), moment()],
+                        '昨日': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        '最近7日': [moment().subtract(6, 'days'), moment()],
+                        '最近30日': [moment().subtract(29, 'days'), moment()],
+                        '本月': [moment().startOf('month'), moment().endOf('month')],
+                        '上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function(start, end) {
+                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                }
+            );
+
+        });
+
+
+
+
+        $(document).ready(function() {
+
+            /*table tree*/
+            $("#collapse-table").treetable({
+                expandable: true
+            });
+
+        });
+
+
+
+
+        $(document).ready(function() {
+
+            CKEDITOR.replace('editor1');
+
+            // $(".textarea").wysihtml5({
+            //     locale:'zh-CN'
+            // });
+
+            $("#markdown-textarea").markdown({
+                language: 'zh',
+                autofocus: false,
+                savable: false
+            });
+
+        });
+
+
+
+        $(document).ready(function() {
 
             // 激活导航位置
-            setSidebarActive("order-manage");
+            setSidebarActive("admin-dataform");
 
-            // 列表按钮 
-            $("#dataList td input[type='checkbox']").iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                increaseArea: '20%'
-            });
-            // 全选操作 
-            $("#selall").click(function() {
-                var clicks = $(this).is(':checked');
-                if (!clicks) {
-                    $("#dataList td input[type='checkbox']").iCheck("uncheck");
-                } else {
-                    $("#dataList td input[type='checkbox']").iCheck("check");
-                }
-                $(this).data("clicks", !clicks);
-            });
         });
     </script>
 </body>

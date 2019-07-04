@@ -28,4 +28,36 @@ public class carController {
 
         return "carPortInfo";
     }
+
+    /**
+     * 删除车位信息
+     * @param carPortId
+     */
+
+    @RequestMapping("/deleteCarPort")
+    public String deleteCarPort(String carPortId){
+        carPortService.deleteCarPort(carPortId);
+        return "redirect:/manager/allCarPort?start=1";
+    }
+
+    /**
+     * 添加车位
+     * @return
+     */
+    @RequestMapping("/addCarPort")
+    public String addCarPort(){
+        carPortService.addCarPort();
+        return "redirect:/manager/allCarPort?start=1";
+    }
+
+    /**
+     * 编辑车位
+     * @return
+     */
+    @RequestMapping("/updateCarPort")
+    public String updateCarPort(String carPortId,Map<String,Object> map){
+        System.out.println(carPortId);
+        map.put("carPortId",carPortId);
+        return "updateCarPort";
+    }
 }

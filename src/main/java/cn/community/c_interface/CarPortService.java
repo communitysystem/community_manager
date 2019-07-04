@@ -17,4 +17,16 @@ public interface CarPortService {
      * @return
      */
     public long countAll();
+
+    /**
+     * 删除车位
+     * @param carPortId
+     */
+    public void deleteCarPort(String carPortId);
+
+    /**
+     * 添加停车位
+     * @
+     */
+    public void addCarPort();
 }

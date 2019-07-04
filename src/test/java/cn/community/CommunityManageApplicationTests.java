@@ -66,10 +66,10 @@ public class CommunityManageApplicationTests {
     }
 
     @Test
-<<<<<<< HEAD
-    public void countCarPort(){
+
+    public void countCarPort() {
         System.out.println(carPortService.countAll());
-=======
+    }
     public void testComplaint() throws Exception {
         /*complaintService.upDataComplantById("0006", "66666666666");
         System.out.println(" success ");*/
@@ -92,6 +92,6 @@ public class CommunityManageApplicationTests {
         Date now = new Date();
         String format = sdf.format(now);
         System.out.println("format = " + format);
->>>>>>> 4ccd4eaf3c3b60df8b9ce27311ca59df51620f9c
+
     }
 }
