@@ -18,6 +18,18 @@ public class News implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Override
+    public String toString() {
+        return "News{" +
+                "newsId='" + newsId + '\'' +
+                ", newsDate=" + newsDate +
+                ", managerId=" + managerId +
+                ", title='" + title + '\'' +
+                ", picture='" + picture + '\'' +
+                ", newCommnet='" + newCommnet + '\'' +
+                '}';
+    }
+
     public String getNewsId() {
         return newsId;
     }

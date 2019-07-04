@@ -38,11 +38,12 @@ public class CommunityManageApplicationTests {
         userService.deleteOwner(5915);
     }
 
-
     @Test
     public void contextLoads() {
-        List<News> allNews = newsService.getAllNews();
-        System.out.println("allNews = " + allNews);
+/*        List<News> allNews = newsService.getAllNews();
+        System.out.println("allNews = " + allNews);*/
+        News newsById = newsService.getNewsById("002");
+        System.out.println("newsById = " + newsById);
     }
 
     @Test
@@ -76,6 +77,7 @@ public class CommunityManageApplicationTests {
     public void countCarPort() {
         System.out.println(carPortService.countAll());
     }
+
     public void testComplaint() throws Exception {
         /*complaintService.upDataComplantById("0006", "66666666666");
         System.out.println(" success ");*/
@@ -103,6 +105,6 @@ public class CommunityManageApplicationTests {
 
     @Test
     public void testMiantain() throws Exception {
-        maintainService.add("没有水 了 ",5901);
+        maintainService.add("没有水 了 ", 5901);
     }
 }
