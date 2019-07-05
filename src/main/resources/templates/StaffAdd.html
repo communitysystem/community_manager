@@ -394,6 +394,7 @@
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
+
             <div class="user-panel">
                 <div class="pull-left image">
                     <img src="../img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -417,13 +418,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                数据管理
-                <small>数据表单</small>
+                员工信息
+                <small>员工修改</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="#">数据管理</a></li>
-                <li class="active">数据表单</li>
+                <li><a href="#">员工信息</a></li>
+                <li class="active">员工修改</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -431,55 +432,48 @@
         <!-- 正文区域 -->
         <section class="content">
 
-
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">停车信息</h3>
-
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <a th:href="@{/carport/add}">
-                            <button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#myModal">
-                                申请停车位
-                            </button>
-                        </a>
-
-
+            <form action="/staff/add"
+                  method="post">
+                <!-- 正文区域 -->
+                <section class="content"> <!--产品信息-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">员工姓名</div>
                         <div class="row data-type">
-                            <!--单行数据显示 非表格-->
-                            <div class="col-md-2 title item-green rowHeight2x"><i class="fa fa-fw fa-car"></i>[[${session.user.getOwnerName()}]]车主
+
+                            <div class="col-md-2 title"></div>
+                            <div class="col-md-4 data">
+                                <input type="text" class="form-control" name="staffName"
+                                >
                             </div>
-                            <div class="col-md-5 data rowHeight2x border-right">
-                                <div class="line">
-                                    <div class="pull-left"><i class="fa fa-fw fa-edit"></i> 停车车位</div>
-                                    <div class="pull-right" th:inline="text">[[${car.getPortId()}]]号车在库</div>
-                                </div>
-                                <div class="line">
-                                    <div class="pull-left"><i class="fa fa-fw fa-edit"></i> 停车车牌号</div>
-                                    <div class="pull-right"><span class="arrowup" th:inline="text"></i>
-                                        [[${session.user.getCarId()}]]</span></div>
-                                </div>
+
+                            <div class="col-md-2 title">员工性别</div>
+
+                            <div class="col-md-4 data">
+                                <select class="form-control" name="sex">
+                                    <option value="male" selected>男</option>
+                                    <option value="female">女</option>
+                                </select>
                             </div>
-                            <div class="col-md-5 data rowHeight2x">
-                                <div class="line">
-                                    <div class="pull-left"><i class="fa fa-fw fa-edit"></i> 停车状态</div>
-                                    <div class="pull-right" th:text="${car.getPortStat()}">已购买停车位</div>
-                                </div>
-                                <div class="line">
-                                    <div class="pull-left"><i class="fa fa-fw fa-edit"></i> 其他信息</div>
-                                    <div class="pull-right"><span class="arrowdown"><i class=""></i>暂无</span></div>
-                                </div>
+
+
+                            <div class="col-md-2 title rowHeight2x">员工手机</div>
+                            <div class="col-md-10 data rowHeight2x">
+							<textarea class="form-control" rows="3"
+                                      name="iphone" ></textarea>
                             </div>
+
                         </div>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-
+                    <!--订单信息/--> <!--工具栏-->
+                    <div class="box-tools text-center">
+                        <button type="submit" class="btn bg-maroon">保存</button>
+                        <button type="button" class="btn bg-default"
+                                onclick="history.back(-1);">返回
+                        </button>
+                    </div>
+                    <!--工具栏/--> </section>
+                <!-- 正文区域 /-->
+            </form>
 
         </section>
         <!-- 正文区域 /-->
@@ -545,6 +539,159 @@
 <script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
 <script src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+
+    $(document).ready(function () {
+        // 选择框
+        $(".select2").select2();
+
+        // WYSIHTML5编辑器
+        $(".textarea").wysihtml5({
+            locale: 'zh-CN'
+        });
+    });
+
+
+    // 设置激活菜单
+    function setSidebarActive(tagUri) {
+        var liObj = $("#" + tagUri);
+        if (liObj.length > 0) {
+            liObj.parent().parent().addClass("active");
+            liObj.addClass("active");
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        // 颜色选取器
+        $(".my-colorpicker1").colorpicker();
+        $(".my-colorpicker2").colorpicker();
+
+    });
+
+
+    $(document).ready(function () {
+        // 选择框
+        $(".select2").select2();
+    });
+
+
+    $(document).ready(function () {
+
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true,
+            language: 'zh-CN'
+        });
+
+        // datetime picker
+        $('#dateTimePicker').datetimepicker({
+            format: "mm/dd/yyyy - hh:ii",
+            autoclose: true,
+            todayBtn: true,
+            // language: 'zh-CN'
+        });
+
+        //Date range picker
+        $('#reservation').daterangepicker({
+            locale: {
+                applyLabel: '确认',
+                cancelLabel: '取消',
+                fromLabel: '起始时间',
+                toLabel: '结束时间',
+                customRangeLabel: '自定义',
+                firstDay: 1
+            },
+            opens: 'left', // 日期选择框的弹出位置
+            separator: ' 至 '
+            //showWeekNumbers : true,     // 是否显示第几周
+        });
+
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'MM/DD/YYYY h:mm A',
+            locale: {
+                applyLabel: '确认',
+                cancelLabel: '取消',
+                fromLabel: '起始时间',
+                toLabel: '结束时间',
+                customRangeLabel: '自定义',
+                firstDay: 1
+            },
+            opens: 'right', // 日期选择框的弹出位置
+            separator: ' 至 '
+        });
+
+        //Date range as a button
+        $('#daterange-btn').daterangepicker({
+                locale: {
+                    applyLabel: '确认',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    customRangeLabel: '自定义',
+                    firstDay: 1
+                },
+                opens: 'right', // 日期选择框的弹出位置
+                separator: ' 至 ',
+                ranges: {
+                    '今日': [moment(), moment()],
+                    '昨日': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    '最近7日': [moment().subtract(6, 'days'), moment()],
+                    '最近30日': [moment().subtract(29, 'days'), moment()],
+                    '本月': [moment().startOf('month'), moment().endOf('month')],
+                    '上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+
+    });
+
+
+    $(document).ready(function () {
+
+        /*table tree*/
+        $("#collapse-table").treetable({
+            expandable: true
+        });
+
+    });
+
+
+    $(document).ready(function () {
+
+        CKEDITOR.replace('editor1');
+
+        // $(".textarea").wysihtml5({
+        //     locale:'zh-CN'
+        // });
+
+        $("#markdown-textarea").markdown({
+            language: 'zh',
+            autofocus: false,
+            savable: false
+        });
+
+    });
+
+
+    $(document).ready(function () {
+
+        // 激活导航位置
+        setSidebarActive("admin-dataform");
+
+    });
+
+</script>
+
 <script>
     $(document).ready(function () {
         // 选择框

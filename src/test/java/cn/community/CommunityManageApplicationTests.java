@@ -107,4 +107,13 @@ public class CommunityManageApplicationTests {
     public void testMiantain() throws Exception {
         maintainService.add("没有水 了 ", 5901);
     }
+
+    @Autowired
+    StaffService staffService;
+
+
+    @Test
+    public void testStaff() {
+        staffService.delById(4);
+    }
 }
