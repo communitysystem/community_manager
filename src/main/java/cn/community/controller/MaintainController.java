@@ -69,4 +69,40 @@ public class MaintainController {
         }
         return resString;
     }
+
+    /**
+     * 查询所有的维修
+     */
+    @RequestMapping("/queryAllMaintian")
+    public String queryAllMaintain(Map<String,Object> map){
+
+        List<Maintain> maintains = maintainService.queryAllMaintain();
+        map.put("maintains",maintains);
+        return "allMaintain";
+
+    }
+    /**
+     * 删除维修
+     */
+    @RequestMapping("/deleteMaintain")
+    public String deleteMaintain(String maintainId){
+        maintainService.deleteMaintain(maintainId);
+        return "redirect:/maintain/queryAllMaintian";
+    }
+
+    /**
+     * 回复维修
+     */
+    @RequestMapping("/reback")
+    public String reback(String maintainId,Map<String,Object> map){
+        map.put("maintainId",maintainId);
+        return "rebackMaintain";
+    }
+    @RequestMapping("/rebackMaintian")
+    public String rebackMaintain(String maintainId,String feedback){
+        System.out.println(maintainId);
+        System.out.println(feedback);
+            maintainService.rebackMaintain(maintainId,feedback);
+        return "redirect:/maintain/queryAllMaintian";
+    }
 }

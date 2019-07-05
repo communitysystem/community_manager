@@ -16,6 +16,25 @@ public class Maintain implements Serializable {
     private String maintainInfo = "无";
 
     private String feedback = "无";
+    //自己添加的属性
+    private  String OwnerName;
+    private  String StaffName;
+
+    public String getOwnerName() {
+        return OwnerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        OwnerName = ownerName;
+    }
+
+    public String getStaffName() {
+        return StaffName;
+    }
+
+    public void setStaffName(String staffName) {
+        StaffName = staffName;
+    }
 
     private static final long serialVersionUID = 1L;
 

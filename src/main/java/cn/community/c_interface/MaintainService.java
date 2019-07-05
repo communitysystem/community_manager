@@ -15,4 +15,15 @@ public interface MaintainService {
     void updateByMaintanId(String maintainId, String maintainInfo) throws Exception;
 
     void add(String maintainInfo, Integer ownerId) throws Exception;
+
+    public List<Maintain> queryAllMaintain();
+    /**
+     * 删除维修
+     */
+    public void deleteMaintain(String maintainId);
+
+    /**
+     * 回复维修信息
+     */
+    public void rebackMaintain(String maintainId,String comment);
 }
