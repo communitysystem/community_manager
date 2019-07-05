@@ -12,6 +12,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/arrearage")
 public class ArrearageController {
+
     @Autowired
     ArrearageService arrearageService;
 
@@ -22,6 +23,7 @@ public class ArrearageController {
         return "arrearageList";
     }
 
+    @RequestMapping("/delById")
     public String delById(String id) {
         arrearageService.delById(id);
         return "redirect:/arrearage/getAll";
